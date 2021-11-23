@@ -1,0 +1,14 @@
+body {
+ width: 80%;
+ margin: 0 auto;
+}
+h1 {
+ font-family: Arial, serif;
+ font-weight: normal;
+ margin: 50px auto;
+ max-width: 750px;
+}
+.month {
+ margin: 20px auto;
+ width: 190px;
+}
