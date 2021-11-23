@@ -46,10 +46,20 @@ let months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 function secondsInAMonth(value) {
     let val;
-    if(value.substr(5, 6) == 0) {
+    if(value.substr(5, 6) === "0") {
         val = months[value.substr(6, 7) - 1] * secondsInADay;
     }
     else val = months[value.substr(5, 7) - 1] * secondsInADay;
     console.log(val);
 }
 
+//9. Создайте переменную с числом и возведите в квадрат
+let numPow = 10;
+console.log("Квадрат 10 = "+ Math.pow(numPow, 2));
+
+//10. Создайте переменную d и присвойте ей значение 8. В переменную n
+// поместите квадрат значения переменной d, а в переменную x
+// - куб значения переменной d
+let d = 8;
+let n = Math.pow(d, 2);
+let x = Math.pow(d, 3);
