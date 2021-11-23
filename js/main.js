@@ -8,10 +8,10 @@ console.log("Задание 2. num = " + num);
 // console.log() их сумму, разность, произведение и частность (деление)
 let first = 5;
 let second = 10;
-console.log("Задание 3. '+'" + first + second);
-console.log("Задание 3. '-'" + first - second);
-console.log("Задание 3. '*'" + first * second);
-console.log("Задание 3. '/'" + first / second);
+console.log("Задание 3. '+': " + first + second);
+console.log("Задание 3. '-': " + first - second);
+console.log("Задание 3. '*': " + first * second);
+console.log("Задание 3. '/': " + first / second);
 
 //4. Создайте переменные a = 3 и b = 10, их сумму присвойте в переменную result
 let a = 3;
