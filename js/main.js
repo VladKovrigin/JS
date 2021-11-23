@@ -2,16 +2,16 @@
 //2. Создайте переменную num и присвойте ей значение 10.
 // Выведите значение этой переменной с помощью console.log()
 let num = 10;
-console.log(num);
+console.log("Задание 2. num = " + num);
 
 //3. Создайте переменные first = 5 и second = 10. Выведите в
 // console.log() их сумму, разность, произведение и частность (деление)
 let first = 5;
 let second = 10;
-console.log(first + second);
-console.log(first - second);
-console.log(first * second);
-console.log(first / second);
+console.log("Задание 3. '+'" + first + second);
+console.log("Задание 3. '-'" + first - second);
+console.log("Задание 3. '*'" + first * second);
+console.log("Задание 3. '/'" + first / second);
 
 //4. Создайте переменные a = 3 и b = 10, их сумму присвойте в переменную result
 let a = 3;
@@ -29,14 +29,14 @@ let end = res - qwerty;
 //6. Создайте переменную str и присвойте ей значение Hello, Palmo.
 // Результат выведите в alert()
 let str = "Hello, Palmo";
-alert(str);
+alert("Задание 6. srt: " + str);
 
 //7. Создайте переменную name с вашим именем и age с возрастом.
 // В alert() выведите результат Я (имя), мне (возраст).
 // (значения подставить из переменных)
 let name = "Владос";
 let age = "18";
-alert( "Я " + name + ", мне " + age);
+alert("Я " + name + ", мне " + age);
 
 //8. Напишите скрипт, который считает количество секунд
 // в часе, сутках и месяце. В console.log() выведите результат
