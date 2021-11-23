@@ -9,7 +9,7 @@ console.log("Задание 2. num = " + num);
 let first = 5;
 let second = 10;
 console.log("Задание 3. '+': " + first + second);
-console.log("Задание 3. '-': " + first - second);
+console.log("Задание 3. '-': " + (first - second));
 console.log("Задание 3. '*': " + first * second);
 console.log("Задание 3. '/': " + first / second);
 
@@ -41,16 +41,19 @@ alert("Я " + name + ", мне " + age);
 //8. Напишите скрипт, который считает количество секунд
 // в часе, сутках и месяце. В console.log() выведите результат
 let secondsInAnHour = 60 * 60;
-let secondsInADay = secondsInAnHour * 24;
-let months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+console.log("сеукнд в одном часе: " + secondsInAnHour);
 
+let secondsInADay = secondsInAnHour * 24;
+console.log("секунд в одном дне: " + secondsInADay);
+
+let months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 function secondsInAMonth(value) {
     let val;
     if(value.substr(5, 6) === "0") {
         val = months[value.substr(6, 7) - 1] * secondsInADay;
     }
     else val = months[value.substr(5, 7) - 1] * secondsInADay;
-    console.log(val);
+    console.log("секунд в это месяце: " + val);
 }
 
 //9. Создайте переменную с числом и возведите в квадрат
