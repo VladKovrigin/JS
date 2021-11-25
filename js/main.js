@@ -5,14 +5,13 @@
 function checkPromptStr(str) {
     try {
         let myPrompt = prompt(str);
-        if (Number(myPrompt)) {
+        if (+myPrompt) {
             return checkPromptStr('Вы ввели число. Попробуйте еще раз');
         } else if(!myPrompt) {
             return checkPromptStr('Вы не ввели значение');
         } else if(!myPrompt.trim()) {
             return checkPromptStr('Вы ввели только пробелы :)')
-        }
-        else {
+        } else {
             return myPrompt;
         }
     } catch (e) {
@@ -30,7 +29,7 @@ function checkPromptNumber(str) {
         let myPrompt = prompt(str);
         if(!myPrompt) {
             return checkPromptNumber('Вы не ввели значение');
-        } else if (!Number(myPrompt)) {
+        } else if (!+myPrompt) {
             return checkPromptNumber('Вы ввели НЕ число. Попробуйте еще раз');
         } else if(!myPrompt.trim()) {
             return checkPromptNumber('Вы ввели только пробелы :)')
@@ -69,21 +68,20 @@ if( num % 2 === 0 ){
 // и на заданный диапазон (не меньше 1 и не больше 100). Выведите пользователю
 // ответ в какой четверти лежит число.1-25 (первая четверть), 26-50
 // (вторая четверть), 51-75 (третья четверть), 76-100 (четвертая четверть);
-let hundred = checkPromptNumber('Введите число от 1 до 100');
+let numSecond = checkPromptNumber('Введите число от 1 до 100');
 
-if( hundred < 0 || hundred > 100 ) {
+if( +numSecond < 0 || +numSecond > 100 ) {
     checkPromptNumber('число от 1 до 100!!!');
 }
-if ( hundred <=25 ) {
+if ( +numSecond <=25 ) {
     alert('Первая четверть');
-} else if ( hundred > 25 && +hundred <= 50 ) {
+} else if ( +numSecond > 25 && +numSecond <= 50 ) {
     alert('Вторая четверть');
-} else if ( hundred > 50 && +hundred <= 75 ) {
+} else if ( +numSecond > 50 && +numSecond <= 75 ) {
     alert('Третья четверть');
-} else {
+} else if (+numSecond > 75 && +numSecond <= 100){
     alert('Четвертая четверть');
 }
-
 //5. Создайте скрипт, который в цикле будет выводить простые числа от 1 до 500;
 let string = '';
 Start:
@@ -101,18 +99,18 @@ for ( let i = 1; i <=500; i++ ) {
 string = '';
 for ( let i = 1000; i >=300; i-- ) {
     string+= `${i}, `;
-} console.log(`6 Задание: ${String}`);
+} console.log(`6 Задание: ${string}`);
 
 
 //7. Попросите пользователя ввести число. Выведите результат сложения,
 // вычитания, деления и умножения введенного числа на все числа от 1 до 100.
-let Num = checkPromptNumber('Введите число для 7 Задания');
+let numThird = checkPromptNumber('Введите число для 7 Задания');
 
 for(let i = 1; i <= 100; i++) {
-    let plus = Number(Num) + Number(i);
-    let minus = Number(Num) - Number(i);
-    let multiple = Number(Num) * Number(i);
-    let division = Number(Num) / Number(i);
+    let plus = +numThird + +i;
+    let minus = +numThird - +i;
+    let multiple = +numThird * +i;
+    let division = +numThird / +i;
     console.log(`${plus}, ${minus}, ${multiple}, ${division.toFixed(3)}\n`);
 }
 
@@ -162,7 +160,8 @@ if ( rand === +yourNum ) {
 
 //10. Камень - ножницы - бумага
 let user = checkPromptStr('Поиграем в КНБ. Ваш знак:');
-let rps = ['Камень', 'Ножницы', 'Бумага'];
+let rps = ['камень', 'ножницы', 'бумага'];
+user = user.toLowerCase();
 
 for( let i = 0; i <= 2; i++ ) {
     if( user === rps[i] ) {
