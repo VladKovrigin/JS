@@ -5,12 +5,12 @@
 function checkPromptStr(str) {
     try {
         let myPrompt = prompt(str);
-        if (+myPrompt) {
-            checkPromptStr('Вы ввели число. Попробуйте еще раз');
+        if (Number(myPrompt)) {
+            return checkPromptStr('Вы ввели число. Попробуйте еще раз');
         } else if(!myPrompt) {
-            checkPromptStr('Вы не ввели значение');
-        } else if(myPrompt[0] === ' ') {
-            checkPromptStr('Вы ввели только пробелы :)')
+            return checkPromptStr('Вы не ввели значение');
+        } else if(!myPrompt.trim()) {
+            return checkPromptStr('Вы ввели только пробелы :)')
         }
         else {
             return myPrompt;
@@ -28,12 +28,12 @@ checkPromptStr('Введите страну где проживаете');
 function checkPromptNumber(str) {
     try {
         let myPrompt = prompt(str);
-        if (!+myPrompt) {
-            checkPromptNumber('Вы ввели НЕ число. Попробуйте еще раз');
-        } else if(!myPrompt) {
-            checkPromptNumber('Вы не ввели значение');
-        } else if(myPrompt[0] === ' ') {
-            checkPromptNumber('Вы ввели только пробелы :)')
+        if(!myPrompt) {
+            return checkPromptNumber('Вы не ввели значение');
+        } else if (!Number(myPrompt)) {
+            return checkPromptNumber('Вы ввели НЕ число. Попробуйте еще раз');
+        } else if(!myPrompt.trim()) {
+            return checkPromptNumber('Вы ввели только пробелы :)')
         } else {
             return +myPrompt;
         }
@@ -45,9 +45,9 @@ let a = checkPromptNumber('Введите первое число');
 let b = checkPromptNumber('Введите второе число');
 
 if( (a % b) === 0 ) {
-    alert('2 число делится нацело на 1');
+    alert(`Число ${a} делится нацело на ${b}`);
 } else if ( (a / b) !== 0 ) {
-    alert('2 число НЕ делится нацело на 1');
+    alert(`Число ${a} НЕ делится нацело на ${b}`);
 }
 
 
@@ -58,9 +58,9 @@ if( (a % b) === 0 ) {
 let num = checkPromptNumber('Введите число для проверки');
 
 if( num % 2 === 0 ){
-    alert('Число четное') ;
+    alert(`Число ${num} четное`) ;
 } else {
-    alert('Число НЕ четное');
+    alert(`Число ${num} НЕ четное`);
 }
 
 
@@ -94,15 +94,14 @@ for ( let i = 1; i <=500; i++ ) {
         }
     }
     string += `${i}, `;
-} console.log('5 Задание:' + string);
+} console.log(`5 Задание: ${string}`);
 
 
 //6. Создайте скрипт, который выведет числа от 1000 до 300 в обратном порядке;
 string = '';
 for ( let i = 1000; i >=300; i-- ) {
     string+= `${i}, `;
-}
-console.log('6 Задание:' + String);
+} console.log(`6 Задание: ${String}`);
 
 
 //7. Попросите пользователя ввести число. Выведите результат сложения,
@@ -114,7 +113,7 @@ for(let i = 1; i <= 100; i++) {
     let minus = Number(Num) - Number(i);
     let multiple = Number(Num) * Number(i);
     let division = Number(Num) / Number(i);
-    console.log(`${plus}, ${minus}, ${multiple}, ${division}\n`);
+    console.log(`${plus}, ${minus}, ${multiple}, ${division.toFixed(3)}\n`);
 }
 
 
@@ -139,7 +138,6 @@ if( calc[1] === '-' ) {
 if( calc[1] === '*' ) {
     alert( `Произведение равно: ${+calc[0] * +calc[2]}` );
 }
-
 if( calc[1] === '/' ) {
     alert( `Частное равно: ${+calc[0] / +calc[2]}` );
 }
@@ -148,7 +146,7 @@ if( calc[1] === '/' ) {
 // 9. Создайте игру "Угадай число".
 let sum = checkPromptNumber('Ваша ставка');
 let start = checkPromptNumber('Диапазон игры ОТ:');
-let end = checkPromptNumber('до:');
+let end = checkPromptNumber('ДО:');
 
 let yourNum = checkPromptNumber( 'Ваше число:' );
 
@@ -184,11 +182,11 @@ for( let i = 0; i <= 2; i++ ) {
         }
 
         if( PC === i ) {
-            alert( 'Ничья' );
+            alert('Ничья');
         } else if( win ) {
-            alert( 'Победа!' );
+            alert('Победа!');
         } else {
-            alert( 'В следующий раз повезет :)' );
+            alert('В следующий раз повезет :)');
         }
     }
 }
