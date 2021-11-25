@@ -41,8 +41,8 @@ function checkPromptNumber(str) {
         console.log(e);
     }
 }
-let a = checkPromptNumber( 'Введите первое число' );
-let b = checkPromptNumber( 'Введите второе число' );
+let a = checkPromptNumber('Введите первое число');
+let b = checkPromptNumber('Введите второе число');
 
 if( (a % b) === 0 ) {
     alert('2 число делится нацело на 1');
@@ -58,9 +58,9 @@ if( (a % b) === 0 ) {
 let num = checkPromptNumber('Введите число для проверки');
 
 if( num % 2 === 0 ){
-    alert( 'Число четное' ) ;
+    alert('Число четное') ;
 } else {
-    alert( 'Число НЕ четное' );
+    alert('Число НЕ четное');
 }
 
 
@@ -75,7 +75,7 @@ if( hundred < 0 || hundred > 100 ) {
     checkPromptNumber('число от 1 до 100!!!');
 }
 if ( hundred <=25 ) {
-    alert( 'Первая четверть' );
+    alert('Первая четверть');
 } else if ( hundred > 25 && +hundred <= 50 ) {
     alert('Вторая четверть');
 } else if ( hundred > 50 && +hundred <= 75 ) {
@@ -102,19 +102,19 @@ string = '';
 for ( let i = 1000; i >=300; i-- ) {
     string+= `${i}, `;
 }
-console.log( '6 Задание:' + String );
+console.log('6 Задание:' + String);
 
 
 //7. Попросите пользователя ввести число. Выведите результат сложения,
 // вычитания, деления и умножения введенного числа на все числа от 1 до 100.
-let Num = checkPromptNumber( 'Введите число для 7 Задания' );
+let Num = checkPromptNumber('Введите число для 7 Задания');
 
 for(let i = 1; i <= 100; i++) {
     let plus = Number(Num) + Number(i);
     let minus = Number(Num) - Number(i);
     let multiple = Number(Num) * Number(i);
     let division = Number(Num) / Number(i);
-    console.log( `${plus}, ${minus}, ${multiple}, ${division}\n` );
+    console.log(`${plus}, ${minus}, ${multiple}, ${division}\n`);
 }
 
 
@@ -126,10 +126,10 @@ for(let i = 1; i <= 100; i++) {
 // знака. При делении добавьте обработку деления на ноль. Если происходит
 // деление на ноль - вывести сообщение "На 0 делить нельзя".
 let calc = [null, '', null];
-calc[0] = checkPromptNumber( 'Начнем 8 задание. Первое число' );
-calc[1] = checkPromptStr( 'операция' );
-calc[2] = checkPromptNumber( 'Второе число' );
-if(calc[2] === '0' && calc[1] === '/')
+calc[0] = checkPromptNumber('Начнем 8 задание. Первое число');
+calc[1] = checkPromptStr('операция');
+calc[2] = checkPromptNumber('Второе число');
+
 if( calc[1] === '+' ) {
     alert( `Сумма равна: ${+calc[0] + +calc[2]}` );
 }
@@ -140,7 +140,7 @@ if( calc[1] === '*' ) {
     alert( `Произведение равно: ${+calc[0] * +calc[2]}` );
 }
 
-if( calc[1] === '/') {
+if( calc[1] === '/' ) {
     alert( `Частное равно: ${+calc[0] / +calc[2]}` );
 }
 
@@ -152,25 +152,25 @@ let end = checkPromptNumber('до:');
 
 let yourNum = checkPromptNumber( 'Ваше число:' );
 
-let rand = Number( Math.floor( Math.random() * (+end - +start) ) ) + +start;
+let rand = Number(Math.floor(Math.random() * (+end - +start))) + +start;
 sum += (+end - +start) * 0.1;
 
 if ( rand === +yourNum ) {
-    alert( `Поздравляем! вы выиграли ${sum}` );
+    alert(`Поздравляем! вы выиграли ${sum}`);
 } else {
-    alert( `Число: ${rand}` );
+    alert(`Число: ${rand}`);
 }
 
 
 //10. Камень - ножницы - бумага
-let user = checkPromptStr( 'Поиграем в КНБ. Ваш знак:' );
+let user = checkPromptStr('Поиграем в КНБ. Ваш знак:');
 let rps = ['Камень', 'Ножницы', 'Бумага'];
 
 for( let i = 0; i <= 2; i++ ) {
     if( user === rps[i] ) {
         let win = false;
 
-        let PC = +Math.floor( Math.random() * 2 );
+        let PC = +Math.floor(Math.random() * 2);
         alert(rps[PC]);
 
         if( user === rps[0] && rps[PC] ===  rps[1] ) {
