@@ -5,7 +5,7 @@
 function checkPromptStr(str) {
     try {
         let myPrompt = prompt(str);
-        if (+myPrompt) {
+        if (!isNaN(Number(myPrompt))) {
             return checkPromptStr('Вы ввели число. Попробуйте еще раз');
         } else if(!myPrompt) {
             return checkPromptStr('Вы не ввели значение');
@@ -29,7 +29,7 @@ function checkPromptNumber(str) {
         let myPrompt = prompt(str);
         if(!myPrompt) {
             return checkPromptNumber('Вы не ввели значение');
-        } else if (!+myPrompt) {
+        } else if (isNaN(Number(myPrompt))) {
             return checkPromptNumber('Вы ввели НЕ число. Попробуйте еще раз');
         } else if(!myPrompt.trim()) {
             return checkPromptNumber('Вы ввели только пробелы :)')
