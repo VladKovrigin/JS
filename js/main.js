@@ -1,38 +1,12 @@
-
-//1. С помощью функции prompt спросите у пользователя
-// его страну проживания. Если пользователь ничего
-// не ввел (пустая строка),
-function checkPromptStr(str) {
-    try {
-        let myPrompt = prompt(str);
-        if (!isNaN(Number(myPrompt))) {
-            return checkPromptStr('Вы ввели число. Попробуйте еще раз');
-        } else if(!myPrompt) {
-            return checkPromptStr('Вы не ввели значение');
-        } else if(!myPrompt.trim()) {
-            return checkPromptStr('Вы ввели только пробелы :)')
-        } else {
-            return myPrompt;
-        }
-    } catch (e) {
-        console.log(e);
-    }
-}
-checkPromptStr('Введите страну где проживаете');
-
-
-//2. С помощью prompt попросите пользователя ввести два числа.
-// После чего выведите результат является ли второе число
-// кратным первому числу;
 function checkPromptNumber(str) {
     try {
         let myPrompt = prompt(str);
         if(!myPrompt) {
-            return checkPromptNumber('Вы не ввели значение');
-        } else if (isNaN(Number(myPrompt))) {
-            return checkPromptNumber('Вы ввели НЕ число. Попробуйте еще раз');
+            return alert('Вы не ввели значение');
+        } else if (!isFinite(+myPrompt)) {
+            return alert('Вы ввели НЕ число. Попробуйте еще раз');
         } else if(!myPrompt.trim()) {
-            return checkPromptNumber('Вы ввели только пробелы :)')
+            return alert('Вы ввели только пробелы :)')
         } else {
             return +myPrompt;
         }
@@ -40,152 +14,104 @@ function checkPromptNumber(str) {
         console.log(e);
     }
 }
-let a = checkPromptNumber('Введите первое число');
-let b = checkPromptNumber('Введите второе число');
-
-if( (a % b) === 0 ) {
-    alert(`Число ${a} делится нацело на ${b}`);
-} else if ( (a / b) !== 0 ) {
-    alert(`Число ${a} НЕ делится нацело на ${b}`);
+//1. Создайте функцию, которая проверяет является ли значение
+// числом. Функция должна возвращать Boolean.
+function isNumber(num) {
+    return isFinite(+num);
 }
 
-
-//3. С помощью prompt попросите пользователя ввести число.
-// Сделать проверку на пустую строку и если значение является
-// НЕ числом.В результате вывести пользователю каким является
-// число (четное или нечетное);
-let num = checkPromptNumber('Введите число для проверки');
-
-if( num % 2 === 0 ){
-    alert(`Число ${num} четное`) ;
-} else {
-    alert(`Число ${num} НЕ четное`);
-}
-
-
-//4. Создайте скрипт, который просит ввести пользователя число от 1 до 100.
-// Добавить проверку на то, что значение является числом,на пустую строку,
-// и на заданный диапазон (не меньше 1 и не больше 100). Выведите пользователю
-// ответ в какой четверти лежит число.1-25 (первая четверть), 26-50
-// (вторая четверть), 51-75 (третья четверть), 76-100 (четвертая четверть);
-let numSecond = checkPromptNumber('Введите число от 1 до 100');
-
-if( +numSecond < 0 || +numSecond > 100 ) {
-    checkPromptNumber('число от 1 до 100!!!');
-}
-if ( +numSecond <=25 ) {
-    alert('Первая четверть');
-} else if ( +numSecond > 25 && +numSecond <= 50 ) {
-    alert('Вторая четверть');
-} else if ( +numSecond > 50 && +numSecond <= 75 ) {
-    alert('Третья четверть');
-} else if (+numSecond > 75 && +numSecond <= 100){
-    alert('Четвертая четверть');
-}
-//5. Создайте скрипт, который в цикле будет выводить простые числа от 1 до 500;
-let string = '';
-Start:
-for ( let i = 1; i <=500; i++ ) {
-    for ( let j = 2; j < i; j++ ) {
-        if ( i % j === 0 ) {
-            continue Start;
-        }
+//2. Создайте функцию, которая принимает 3 числа. Возвращать
+// должна среднее из этих 3х чисел. (Не забудьте добавить
+// проверки нато, что аргументы не пустые и являются числами).
+function middleNumber(firstNum, secondNum, thirdNum) {
+    if( firstNum <= secondNum && secondNum <= thirdNum ) {
+        return secondNum;
     }
-    string += `${i}, `;
-} console.log(`5 Задание: ${string}`);
+    if( secondNum <= firstNum && firstNum <= thirdNum ) {
+        return firstNum;
+    }
+    if( secondNum <= thirdNum && thirdNum <= firstNum ) {
+        return thirdNum;
+    } else {
+        return false;
+    }
+}
+let num = [];
+num[0] = checkPromptNumber();
+num[1] = checkPromptNumber();
+num[2] = checkPromptNumber();
+num.sort();
+alert(middleNumber(num[0], num[1], num[2]));
 
-
-//6. Создайте скрипт, который выведет числа от 1000 до 300 в обратном порядке;
-string = '';
-for ( let i = 1000; i >=300; i-- ) {
-    string+= `${i}, `;
-} console.log(`6 Задание: ${string}`);
-
-
-//7. Попросите пользователя ввести число. Выведите результат сложения,
-// вычитания, деления и умножения введенного числа на все числа от 1 до 100.
-let numThird = checkPromptNumber('Введите число для 7 Задания');
-
-for(let i = 1; i <= 100; i++) {
-    let plus = +numThird + +i;
-    let minus = +numThird - +i;
-    let multiple = +numThird * +i;
-    let division = +numThird / +i;
-    console.log(`${plus}, ${minus}, ${multiple}, ${division.toFixed(3)}\n`);
+//3. Создайте функцию, которая принимает объект и проверяет
+// есть ли в нем свойство 'name'. Вернуть Boolean тип.
+function checkName(obg) {
+    return obg.hasOwnProperty('name');
 }
 
-
-//8. Создайте простой калькулятор. Попросите пользователя первый операнд,
-// знак и второй операнд. Отобразите пользователю результат выполнения
-// математического действия. Например: ввели 10, ввели "+", ввели 20
-// (3 вызова prompt), результат - 30 (вывести в alert).Знаки могут быть
-// "+", "-", "*", "/". Так же добавьте проверки на ввод двух операндов и
-// знака. При делении добавьте обработку деления на ноль. Если происходит
-// деление на ноль - вывести сообщение "На 0 делить нельзя".
-let calc = [null, '', null];
-calc[0] = checkPromptNumber('Начнем 8 задание. Первое число');
-calc[1] = checkPromptStr('операция');
-calc[2] = checkPromptNumber('Второе число');
-
-if( calc[1] === '+' ) {
-    alert( `Сумма равна: ${+calc[0] + +calc[2]}` );
+//4. Создайте функцию, которая принимает объект со свойствами
+// name и username и возвращает строку в формате Имя Фамилия.
+function writeNamesUser(obg) {
+    return `${obg.name} ${obg.username}`;
 }
-if( calc[1] === '-' ) {
-    alert( `Разница равна: ${+calc[0] - +calc[2]}` );
+let user = {
+    name: 'John',
+    username: 'hot mexican boy'
+};
+alert(writeNamesUser(user));
+
+//5. Создайте функцию, которая принимает объекте типа
+// {name1: 200, name2: 500, name3: 400}. Функция должна
+// вернуть сумму всех свойств объекта.
+function sumNums(obg) {
+    return obg.nameFirst + obg.nameSecond + obg.nameThird;
 }
-if( calc[1] === '*' ) {
-    alert( `Произведение равно: ${+calc[0] * +calc[2]}` );
+let nums = {
+    nameFirst: 200,
+    nameSecond: 500,
+    nameThird: 400,
 }
-if( calc[1] === '/' ) {
-    alert( `Частное равно: ${+calc[0] / +calc[2]}` );
-}
+alert(sumNums(nums));
 
-
-// 9. Создайте игру "Угадай число".
-let sum = checkPromptNumber('Ваша ставка');
-let start = checkPromptNumber('Диапазон игры ОТ:');
-let end = checkPromptNumber('ДО:');
-
-let yourNum = checkPromptNumber( 'Ваше число:' );
-
-let rand = Number(Math.floor(Math.random() * (+end - +start))) + +start;
-sum += (+end - +start) * 0.1;
-
-if ( rand === +yourNum ) {
-    alert(`Поздравляем! вы выиграли ${sum}`);
-} else {
-    alert(`Число: ${rand}`);
-}
-
-
-//10. Камень - ножницы - бумага
-let user = checkPromptStr('Поиграем в КНБ. Ваш знак:');
-let rps = ['камень', 'ножницы', 'бумага'];
-user = user.toLowerCase();
-
-for( let i = 0; i <= 2; i++ ) {
-    if( user === rps[i] ) {
-        let win = false;
-
-        let PC = +Math.floor(Math.random() * 2);
-        alert(rps[PC]);
-
-        if( user === rps[0] && rps[PC] ===  rps[1] ) {
-            win = true;
-        }
-        if( user ===  rps[1] && rps[PC] ===  rps[2] ) {
-            win = true;
-        }
-        if( user ===  rps[2] && rps[PC] ===  rps[0] ) {
-            win = true
-        }
-
-        if( PC === i ) {
-            alert('Ничья');
-        } else if( win ) {
-            alert('Победа!');
+//6. Создайте функцию, которая принимает объект. Все ЧИСЛОВЫЕ
+// свойства объекта нужно поделить на 2, если получилось НЕ целое
+// число - округлить его по математическим правилами, а текстовые
+// поменять на строку Hello, Palmo. Если свойство не числовое или
+// не текстовое - удалить его из объекта. Функция должна вернуть
+// переделанный объект.
+function editObject(obg) {
+    for(x in obg) {
+        if(isFinite(+obg.x)) {
+            obg.x = obg.x / 2;
+            if(obg.x % 2 !== 0) {
+                obg.x = Math.round(obg.x);
+            }
+        } else if(!isFinite(+obg.x)) {
+            obg.x = 'Hello, Palmo';
         } else {
-            alert('В следующий раз повезет :)');
+            delete obg.x;
         }
     }
+    return obg;
 }
+
+// 7. Создайте игру "Викторина". Опираясь на ваши знания по JS,
+// создайте игру, которая поочередно задаст пользователю 10 вопросов.
+// За каждый правильный ответ начисляйте пользователю 1 балл. После
+// ответа на все вопросы выведите сколько баллов заработал пользователь.
+function quiz() {
+    let questions = ['Первый президент Украины', 'Palmo - лучшая IT компания',];
+
+    questions += ['undefined === null', 'true == 1', 'false != 0', '“1” == true'];
+    questions += ['“0” == false', '5 >= 5'];
+
+    let score = 0;
+    for(let i = 0; i < 10; i++) {
+        let myAnswer = checkPromptNumber(`${questions[i]}`);
+        if (myAnswer === questions[i]) {
+            score++;
+        }
+    }
+    return alert(`Поздравляем! Вы набрали ${score} баллов!`);
+}
+quiz();
