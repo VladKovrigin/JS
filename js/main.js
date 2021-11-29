@@ -1,6 +1,6 @@
-function checkPromptNumber(str) {
+function checkPromptNumber(string) {
     try {
-        let myPrompt = prompt(str);
+        const myPrompt = prompt(string);
         if(!myPrompt) {
             return alert('Вы не ввели значение');
         } else if (!isFinite(+myPrompt)) {
@@ -18,8 +18,8 @@ function checkPromptNumber(str) {
 
 //1. Создайте функцию, которая проверяет является ли значение
 // числом. Функция должна возвращать Boolean.
-function isNumber(num) {
-    return isFinite(+num);
+function isNumber(number) {
+    return number === ''  ?  false : isFinite(+number);
 }
 
 
@@ -36,9 +36,9 @@ function middleNumber(a, b, c) {
     }
 }
 
-let a = checkPromptNumber();
-let b = checkPromptNumber();
-let c = checkPromptNumber();
+const a = checkPromptNumber();
+const b = checkPromptNumber();
+const c = checkPromptNumber();
 alert(middleNumber(a, b, c));
 
 
@@ -51,8 +51,12 @@ function checkName(obj) {
 
 //4. Создайте функцию, которая принимает объект со свойствами
 // name и username и возвращает строку в формате Имя Фамилия.
-function writeNamesUser(obj) {
-    return `${obj.name} ${obj.username}`;
+function writeNamesUser(object) {
+    if(object.name && object.username) {
+        return `${object.name} ${object.username}`;
+    } else {
+        return 'Имеются не все данные';
+    }
 }
 let user = {
     name: 'John',
@@ -64,12 +68,12 @@ alert(writeNamesUser(user));
 //5. Создайте функцию, которая принимает объекте типа
 // {name1: 200, name2: 500, name3: 400}. Функция должна
 // вернуть сумму всех свойств объекта.
-function sumNums(obj) {
-    let res = 0;
-    for(let x in obj) {
-        res += Number(obj[x]);
-        console.log(res);
-    } return res;
+function sumNums(object) {
+    let result = 0;
+    for(let item in object) {
+        result += Number(object[item]);
+        console.log(result);
+    } return result;
 }
 
 let nums = {
@@ -77,7 +81,6 @@ let nums = {
     nameSecond: 500,
     nameThird: 400,
 }
-
 alert('5 задание' + sumNums(nums));
 
 
@@ -87,23 +90,25 @@ alert('5 задание' + sumNums(nums));
 // поменять на строку Hello, Palmo. Если свойство не числовое или
 // не текстовое - удалить его из объекта. Функция должна вернуть
 // переделанный объект.
-function editObject(obj) {
-    for(let x in obj) {
-        if(isFinite(+obj[x])) {
-            obj[x] = obj[x] / 2;
-            if(obj[x] % 2 !== 0) {
-                obj[x] = Math.round(obj[x]);
+function editObject(object) {
+    for( let item in object ) {
+        if( isFinite( +object[item] ) ) {
+            object[item] = object[item] / 2;
+            if( object[item] % 2 !== 0 ) {
+                object[item] = Math.round(object[item]);
             }
-        } else if(!isFinite(+obj[x])) {
-            obj[x] = 'Hello, Palmo';
+        } else if( !isFinite(+object[item]) ) {
+            object[item] = 'Hello, Palmo';
         } else {
-            delete obj[x];
+            delete object[item];
         }
     }
-    return obj;
+    return object;
 }
-
-alert('6 задание ' + editObject(user) + '\n' + editObject(nums));
+user = editObject(user);
+nums = editObject(nums);
+console.log(user);
+console.log(nums);
 
 // 7. Создайте игру "Викторина". Опираясь на ваши знания по JS,
 // создайте игру, которая поочередно задаст пользователю 10 вопросов.
