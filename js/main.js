@@ -234,6 +234,7 @@ function getHighestSalary(users) {
 
 console.log(`богатейший из всех ${getHighestSalary(usersSecond)}`);
 
+
 //15. Напишите функцию, которая проверяет корректность строки.
 // Строка должна быть не менее 3х символов и не более 16ти
 // символов, должна быть не пустая, не должна содержать числа.
@@ -253,3 +254,28 @@ function checkCorrectString(string) {
     return true;
 }
 
+//16. Напишите функцию, которая проверяет пароль на корректность.
+// Пароль должен быть не менее 6ти символов, должен содержать
+// хотя бы одну цифру и хотя бы одну заглавную букву
+function checkCorrectPassword(password) {
+    let truthFirst = false;
+    let truthSecond = false;
+    password = password.split('');
+    if(password.length >= 6) {
+        for(let item in password) {
+            if(item === item.toUpperCase()) {
+                truthFirst = true;
+            }
+            if(item !== ' '  && !isNaN(+item)) {
+                truthSecond = true;
+            }
+        }
+    }
+    if(truthSecond && truthSecond) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+console.log('пароль ' + checkCorrectPassword('qWyu 1s'));
