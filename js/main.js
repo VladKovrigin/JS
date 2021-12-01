@@ -47,7 +47,7 @@ function unionArrays(arrayFirst, arraySecond) {
     let result = [];
     const fullArray = arrayFirst.concat(arraySecond);
 
-    for(let item of arrayFirst) {
+    for(let item of fullArray) {
         if(!result.includes(item)) {
             result.push(item);
         }
