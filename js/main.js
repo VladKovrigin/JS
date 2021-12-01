@@ -3,6 +3,9 @@
 //    остальные символы должны быть в нижнем регистре (пример: upFirst("иванов"),
 //    должно вернуть "Иванов", up_first("ИВАНОВ"), должно вернуть "Иванов")
 function upFirst(str) {
+    if(str.length < 2) {
+        return str;
+    }
     str = str.toLowerCase();
     let firstLetter = str[0].toUpperCase();
     return firstLetter + str.substr(1);
@@ -28,12 +31,13 @@ function getShortName(fullName) {
 //4. Напишите функцию, которая принимает массив объектов.
 // Функция должна вернуть массив только с теми объектами, у которых есть свойство name
 function checkName(objectArray) {
-    let newArray;
+    let newArray = [];
     for(let item in objectArray) {
         if(objectArray[item].hasOwnProperty('name')) {
-            newArray += objectArray;
+            newArray.push(objectArray[item]);
         }
-    } return newArray;
+    }
+    return newArray;
 }
 
 
@@ -68,6 +72,9 @@ alert(toCamelCase('код-с-тире'));
 // calc('5 + 10') // вернет 15
 function calc(string) {
     string = string.split(' ');
+    if(isNaN(string[0]) || isNaN(string[2])) {
+        return 'ошибка';
+    }
     if(string[1] === '+') {
         return +string[0] + +string[2];
     }
@@ -107,7 +114,9 @@ const users = [
 function usersNames(users) {
     let names = [];
     for(let item in users) {
-        names[item] = users[item].name;
+        if(users[item].hasOwnProperty('name')) {
+            names[item] = users[item].name;
+        }
     }
     return names;
 }
@@ -148,13 +157,10 @@ function checkSpam(string) {
 // - вернуть true, если нет - false.
 const swearWords = ['блять', 'ебать', 'пизда', 'сука', 'хуй'];
 function checkSwearWords(string) {
-    string.split('');
+    string = string.split(' ');
     for(let item of string) {
-        for(let word of swearWords) {
-            if(string[item] === swearWords[word]) {
-                console.log('и где тут мат? ' + string[item] + ' '+ swearWords[word])
-                return true;
-            }
+        if(swearWords.includes(item)) {
+            return true;
         }
     }
     return false;
@@ -169,16 +175,15 @@ alert('есть мат: ' + checkSwearWords('ого ебать сука'));
 function arrayToSentence(array) {
     let newString = '';
     for(let item of array) {
-        if(typeof array[item] !== 'object' && typeof array[item] !== 'number') {
-            newString += `${array[item]} `;
+        if(typeof item === 'string') {
+            newString += `${item} `;
             console.log(newString);
         }
     }
     return newString;
 }
 
-
-console.log(arrayToSentence(['Привет', 1, null, 'как', '{}', 'дела']));
+console.log(arrayToSentence(['Привет', 1, null, 'как', {}, 'дела']));
 
 //13. Напишите функцию, которая принимает массив из 10 целых чисел
 // (от 0 до 9), который возвращает строку этих чисел в форме номера телефона.
@@ -233,23 +238,18 @@ console.log(`богатейший из всех ${getHighestSalary(usersSecond)}
 // Строка должна быть не менее 3х символов и не более 16ти
 // символов, должна быть не пустая, не должна содержать числа.
 function checkCorrectString(string) {
-    if(string.trim()) {
+    if(typeof string !== 'string')  {
         return false;
     }
+    string = string.trim();
     if(string.length < 3 || string.length > 16) {
         return false;
     }
-    for(let symbol of string) {
-        if(isFinite(+string[symbol]) && !isNaN(+string[symbol])) {
+    for(let item of string) {
+        if( item !== ' '  && !isNaN(+item) ) {
             return false;
         }
     }
-
     return true;
 }
 
-console.log('в строке всё ок ' + checkCorrectString('тут всё ок'));
-console.log('вот тут число ' + checkCorrectString('тут число 1'));
-console.log('тут слишком мало символов ' + checkCorrectString('т'));
-console.log('слишком много символов ' + checkCorrectString('тут много символов очень много'));
-console.log('пустая строка ' + checkCorrectString('    '));
