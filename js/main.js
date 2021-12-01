@@ -44,14 +44,15 @@ function checkName(objectArray) {
 //5. Напишите функцию, которая принимает два массива. Функция должна
 // вернуть результат объединения этих массивов без дубликатов
 function unionArrays(arrayFirst, arraySecond) {
+    let result = [];
+    const fullArray = arrayFirst.concat(arraySecond);
+
     for(let item of arrayFirst) {
-        for(let value of arraySecond) {
-            if(arrayFirst[item] === arraySecond[value]) {
-                arraySecond.splice(value, 1);
-            }
+        if(!result.includes(item)) {
+            result.push(item);
         }
     }
-    return arrayFirst.concat(arraySecond);
+    return result;
 }
 
 
@@ -177,7 +178,6 @@ function arrayToSentence(array) {
     for(let item of array) {
         if(typeof item === 'string') {
             newString += `${item} `;
-            console.log(newString);
         }
     }
     return newString;
@@ -262,7 +262,7 @@ function checkCorrectPassword(password) {
     let truthSecond = false;
     password = password.split('');
     if(password.length >= 6) {
-        for(let item in password) {
+        for(let item of password) {
             if(item === item.toUpperCase()) {
                 truthFirst = true;
             }
@@ -277,5 +277,3 @@ function checkCorrectPassword(password) {
         return false;
     }
 }
-
-console.log('пароль ' + checkCorrectPassword('qWyu 1s'));
