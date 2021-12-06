@@ -166,8 +166,7 @@ submitButton.onclick = function () {
     }
 
     let wrongPasswordAgainMessage = document.getElementById('wrongPasswordAgain');
-    let checkPasswordAgain = passwordAgain.value.match(/\d+/);
-    if(passwordAgain.value.length < 6 || !checkPasswordAgain) {
+    if(passwordAgain.value.length < 6 || !checkPassword) {
         passwordAgain.style.borderColor = 'red';
         wrongPasswordAgainMessage.innerText = 'Пароль должен иметь не менее 6 символов';
     } else {
