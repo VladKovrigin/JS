@@ -2,12 +2,126 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="css/main.css" rel="stylesheet">
     <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+
 </head>
 <body>
-    <script src="js/main.js"></script>
+<div>
+    <button onclick="alert('Hello, Palmo')">
+        Кликни
+    </button>
+</div>
+
+
+<div>
+    <button id="to-hello-world">Кликни</button>
+    <input id="second-point">
+</div>
+
+<div>
+    <button id="console-log">Кликни</button>
+    <input id="value-to-log">
+</div>
+
+<div>
+    <button id="reverse-value">Кликни</button>
+    <p id="first-value">Сначала тут</p>
+    <p id="second-value">Теперь тут</p>
+</div>
+
+<div>
+    <button id="change-color">Кликни</button>
+    <p id="p-color">Смена цвета текста</p>
+</div>
+
+<div>
+    <button id="to-disabled">Кликни</button>
+    <input id="disable-input">
+</div>
+
+<div class="squads">
+    <div id="first"></div>
+    <div id="second"></div>
+</div>
+
+<div class="add-li-div">
+    <button id="add-li">Добавить li</button>
+    <ul id="ol"></ul>
+</div>
+
+<div class="textArea">
+    <button id="add-to-textarea">Добавить</button>
+    <textarea id="text-area"></textarea>
+    <ul id="from-textarea"></ul>
+</div>
+
+<form id="first-form">
+    <label>
+        <input type="text" id="login" placeholder="Логин">
+    </label>
+    <label>
+        <input type="password" id="password" placeholder="Пароль">
+    </label>
+    <label>
+        <input type="password" id="password-again" placeholder="Пароль еще раз">
+    </label>
+    <label>
+        <input type="text" id="email" placeholder="Электронная почта">
+    </label>
+    <label>
+        <input type="text" id="age" placeholder="Возраст">
+    </label>
+    <button type="submit" id="submit-button">
+        Зарегистрироваться
+    </button>
+</form>
+
+<div class="container col-12">
+    <div id="header">
+        <h3>Javascript Calculator</h3></div>
+    <div id="calc" class="text-center">
+        <div id="display">
+            <div id="result"><p>0</p></div>
+            <div id="previous"><p>0</p></div>
+        </div>
+        <div id="keyboard">
+            <div class="row">
+                <button class="btn btn-info" value="7">7</button>
+                <button class="btn btn-info" value="8">8</button>
+                <button class="btn btn-info" value="9">9</button>
+                <button class="btn btn-danger" value="ac">AC</button>
+                <button class="btn btn-danger" value="ce">CE</button>
+            </div>
+            <div class="row">
+                <button class="btn btn-info" value="4">4</button>
+                <button class="btn btn-info" value="5">5</button>
+                <button class="btn btn-info" value="6">6</button>
+                <button class="btn btn-warning" value="/">/</button>
+                <button class="btn btn-warning" value="*">*</button>
+            </div>
+            <div class="row">
+                <button class="btn btn-info" value="1">1</button>
+                <button class="btn btn-info" value="2">2</button>
+                <button class="btn btn-info" value="3">3</button>
+                <button class="btn btn-warning" value="+">+</button>
+                <button class="btn btn-success btn-result" value="=">=</button>
+
+            </div>
+            <div class="row last-row">
+                <button class="btn btn-info btn-zero" value="0">0</button>
+                <!-- <button class="invisible" value=""></button> -->
+                <button class="btn btn-warning" value=".">.</button>
+                <button class="btn btn-warning" value="-">-</button>
+                <!-- <button class="invisible" value=""></button> -->
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/main.js"></script>
 </body>
 </html>
