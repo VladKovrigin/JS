@@ -166,21 +166,33 @@ submitButton.onclick = function () {
 // кнопку "=" - вывести результат математического выражения.
 // Не забудьте добавить все проверки.
 let buttons = document.getElementById('keyboard').getElementsByTagName('button');
-let previous = document.getElementById('previous');
-let result = document.getElementById('result');
+let previous = document.getElementById('previous').value;
+let result = document.getElementById('result').value;
 
 for(let button of buttons) {
     button.onclick = function() {
-        if(button.value === '=') {
-            result.value = eval(String(previous.value));
+        if(button.value === ' = ') {
+            previous.split(' ');
+            if(previous[1] === '+') {
+                result = previous[0] + previous[2];
+            }
+            if(previous[1] === '-') {
+                result = previous[0] + previous[2];
+            }
+            if(previous[1] === '/') {
+                result = previous[0] + previous[2];
+            }
+            if(previous[1] === '*') {
+                result = previous[0] + previous[2];
+            }
         }
         if(button.value === 'ac') {
-            previous.value.slice(0, previous.value.length);
+            previous.slice(0, previous.length);
         }
         if(button.value === 'ce') {
-            previous.value.slice(0, -1);
+            previous.slice(0, -1);
         }
         console.log(button.value);
-        previous.append(button.value);
+        document.getElementById('previous').append(button.value);
     }
 }
