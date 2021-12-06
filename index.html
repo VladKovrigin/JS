@@ -75,7 +75,7 @@
     <label>
         <input type="text" id="age" placeholder="Возраст">
     </label>
-    <button type="submit" id="submit-button">
+    <button type="button" id="submit-button">
         Зарегистрироваться
     </button>
 </form>
@@ -85,8 +85,8 @@
         <h3>Javascript Calculator</h3></div>
     <div id="calc" class="text-center">
         <div id="display">
-            <div id="result"><p>0</p></div>
-            <div id="previous"><p>0</p></div>
+            <div><p id="previous">0</p></div>
+            <div><p id="result">0</p></div>
         </div>
         <div id="keyboard">
             <div class="row">
@@ -113,11 +113,8 @@
             </div>
             <div class="row last-row">
                 <button class="btn btn-info btn-zero" value="0">0</button>
-                <!-- <button class="invisible" value=""></button> -->
                 <button class="btn btn-warning" value=".">.</button>
                 <button class="btn btn-warning" value="-">-</button>
-                <!-- <button class="invisible" value=""></button> -->
-
             </div>
         </div>
     </div>

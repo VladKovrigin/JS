@@ -127,35 +127,35 @@ let password = document.getElementById('password');
 let passwordAgain = document.getElementById('password-again');
 let email = document.getElementById('email');
 let myAge = document.getElementById('age');
-let checkLogin = '._/\\|,';
-submitButton.disabled = false;
-let check = 0;
+
+let checkLogin = '._/|,';
+let check = true;
+
 submitButton.onclick = function () {
     if(login.value.length < 4 || login.value.length > 20 || login.value.includes(checkLogin)) {
-        check++;
+        check = false;
     }
-
     let checkEmail = /\S+@\S+\.\S+/;
     if(!checkEmail.test(email.value)) {
-        check++;
+        check = false;
     }
     if(!isFinite(myAge.value) || isFinite(myAge.value) < 0) {
-        check++;
+        check = false;
     }
     let checkPassword = password.value.match(/\d+/);
     if(password.value.length < 6 || !checkPassword) {
-        check++;
+        check = false;
     }
     let checkPasswordAgain = passwordAgain.value.match(/\d+/);
     if(passwordAgain.value.length < 6 || !checkPasswordAgain) {
-        check++;
+        check = false;
     }
-    if(password.value === passwordAgain.value) {
-        check++;
+    if(password.value !== passwordAgain.value) {
+        check = false;
     }
 
-    if(check > 0) {
-        console.log(check);
+    if(!check) {
+        console.log('check = ' + check);
         alert('ПРОВЕРЬТЕ ПРАВИЛЬНОСТЬ ЗАПОЛНЕНИЯ');
     }
 }
@@ -165,10 +165,22 @@ submitButton.onclick = function () {
 // или знак, значение должно появляться в строке. При нажатии на
 // кнопку "=" - вывести результат математического выражения.
 // Не забудьте добавить все проверки.
-let button = document.getElementById('keyboard').getElementsByTagName('button');
-let previous = document.getElementById('previous').getElementsByTagName('p');
-let result = document.getElementById('result').getElementsByTagName('p');
+let buttons = document.getElementById('keyboard').getElementsByTagName('button');
+let previous = document.getElementById('previous');
+let result = document.getElementById('result');
 
-button.onclick = function() {
-    previous.prepend(button.value);
+for(let button of buttons) {
+    button.onclick = function() {
+        if(button.value === '=') {
+            result.value = eval(String(previous.value));
+        }
+        if(button.value === 'ac') {
+            previous.value.slice(0, previous.value.length);
+        }
+        if(button.value === 'ce') {
+            previous.value.slice(0, -1);
+        }
+        console.log(button.value);
+        previous.append(button.value);
+    }
 }
