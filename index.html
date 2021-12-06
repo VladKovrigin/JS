@@ -76,48 +76,98 @@
         <input type="text" id="age" placeholder="Возраст">
     </label>
     <button type="button" id="submit-button">
-        Зарегистрироваться
+        Регистрация
     </button>
 </form>
 
 <div class="container col-12">
-    <div id="header">
-        <h3>Javascript Calculator</h3></div>
     <div id="calc" class="text-center">
         <div id="display">
-            <div><p id="previous">0</p></div>
-            <div><p id="result">0</p></div>
+            <div><p id="previous"></p></div>
+            <div><p id="result"></p></div>
         </div>
         <div id="keyboard">
             <div class="row">
                 <button class="btn btn-info" value="7">7</button>
                 <button class="btn btn-info" value="8">8</button>
                 <button class="btn btn-info" value="9">9</button>
-                <button class="btn btn-danger" value="ac">AC</button>
-                <button class="btn btn-danger" value="ce">CE</button>
+                <button class="btn btn-warning" value="*">*</button>
             </div>
             <div class="row">
                 <button class="btn btn-info" value="4">4</button>
                 <button class="btn btn-info" value="5">5</button>
                 <button class="btn btn-info" value="6">6</button>
-                <button class="btn btn-warning" value=" / ">/</button>
-                <button class="btn btn-warning" value=" * ">*</button>
+                <button class="btn btn-warning" value="/">/</button>
             </div>
             <div class="row">
                 <button class="btn btn-info" value="1">1</button>
                 <button class="btn btn-info" value="2">2</button>
                 <button class="btn btn-info" value="3">3</button>
-                <button class="btn btn-warning" value=" + ">+</button>
-                <button class="btn btn-success btn-result" value=" = ">=</button>
-
+                <button class="btn btn-warning" value="+">+</button>
             </div>
             <div class="row last-row">
                 <button class="btn btn-info btn-zero" value="0">0</button>
-                <button class="btn btn-warning" value=" . ">.</button>
-                <button class="btn btn-warning" value=" - ">-</button>
+                <button class="btn btn-warning" value=".">.</button>
+                <button class="btn btn-warning" value="-">-</button>
+                <button class="btn btn-success btn-result" value="=">=</button>
             </div>
         </div>
     </div>
+</div>
+
+<div id="wrapper">
+    <div class="item_box">
+        <p class="item_title">
+            iPhone 3000 ultra
+        </p>
+        <p>
+            Цена:
+            <span class="item_price">
+                20
+            </span>
+            $
+        </p>
+        <button class="add_item" data-id="7">
+            Добавить в корзину
+        </button>
+    </div>
+    <div class="item_box">
+        <p class="item_title">
+            SamsunK S15
+        </p>
+        <p>
+            Цена:
+            <span class="item_price">
+                100
+            </span>
+            $
+        </p>
+        <button class="add_item" data-id="2">
+            Добавить в корзину
+        </button>
+    </div>
+    <div class="item_box">
+        <p class="item_title"></p>
+        <p>
+            Цена:
+            <span class="item_price">
+                1000
+            </span>
+            $
+        </p>
+        <button class="add_item" data-id="5">
+            Добавить в корзину
+        </button>
+    </div>
+    <p>
+        <button id="checkout">
+            Оформить заказ
+        </button> &nbsp;
+        <button id="clear_cart">
+            Очистить корзину
+        </button>
+    </p>
+    <div id="cart_content"></div>
 </div>
 <script src="js/main.js"></script>
 </body>

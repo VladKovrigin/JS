@@ -90,8 +90,27 @@ textarea {
 #display {
  color: white;
  background-color: #7c7c7c;
- width: 420px;
+ margin-left: 20px;
+ width: 300px;
  border-radius: 20px;
- padding: 10px;
+ padding: 5px;
  text-align: right;
+}
+
+#wrapper .item_box {
+ display: inline-flex;
+ flex-direction: row;
+ justify-content: space-between;
+}
+#wrapper {
+ display: flex;
+ flex-direction: column;
+ width: 700px;
+ font-size: 24px;
+ font-family: Roboto;
+ font-weight: normal;
+}
+
+#cart_content td {
+ margin-right: 10px;
 }

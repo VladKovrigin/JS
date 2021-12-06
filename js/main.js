@@ -166,33 +166,87 @@ submitButton.onclick = function () {
 // кнопку "=" - вывести результат математического выражения.
 // Не забудьте добавить все проверки.
 let buttons = document.getElementById('keyboard').getElementsByTagName('button');
-let previous = document.getElementById('previous').value;
-let result = document.getElementById('result').value;
 
 for(let button of buttons) {
     button.onclick = function() {
-        if(button.value === ' = ') {
-            previous.split(' ');
-            if(previous[1] === '+') {
-                result = previous[0] + previous[2];
-            }
-            if(previous[1] === '-') {
-                result = previous[0] + previous[2];
-            }
-            if(previous[1] === '/') {
-                result = previous[0] + previous[2];
-            }
-            if(previous[1] === '*') {
-                result = previous[0] + previous[2];
-            }
+        if(button.value === '=') {
+            let result = eval(document.getElementById('previous').innerText);
+            document.getElementById('result').innerText = result;
         }
-        if(button.value === 'ac') {
-            previous.slice(0, previous.length);
-        }
-        if(button.value === 'ce') {
-            previous.slice(0, -1);
-        }
-        console.log(button.value);
-        document.getElementById('previous').append(button.value);
+        document.getElementById('previous').innerText += button.value;
     }
 }
+
+
+
+// 12. Корзина товаров
+let itemBox = document.querySelectorAll('.item_box');
+let cartCont = document.getElementById('cart_content');
+function addEvent(elem, type, handler){
+    if(elem.addEventListener){
+        elem.addEventListener(type, handler, false);
+    }
+    return false;
+}
+
+function getCartData(){
+    return JSON.parse(localStorage.getItem('cart'));
+}
+function setCartData(o){
+    localStorage.setItem('cart', JSON.stringify(o));
+    return false;
+}
+
+function addToCart(e) {
+    let cartData = getCartData() || {};
+    let parentBox = this.parentNode;
+    let itemId = this.getAttribute('data-id');
+    let itemTitle = parentBox.querySelector('.item_title').innerHTML;
+    let itemPrice = parentBox.querySelector('.item_price').innerHTML;
+
+    if(cartData.hasOwnProperty(itemId)){
+        cartData[itemId][2]++;
+    } else {
+        cartData[itemId] = [itemTitle, itemPrice, 1];
+    }
+
+    if(!setCartData(cartData)){
+        cartCont.innerHTML = 'Товар добавлен в корзину.';
+        setTimeout(function(){
+            cartCont.innerHTML = 'Продолжить покупки...';
+        }, 500);
+    }
+    return false;
+}
+
+for(let i = 0; i < itemBox.length; i++){
+    addEvent(itemBox[i].querySelector('.add_item'), 'click', addToCart);
+}
+
+function openCart(e){
+    let cartData = getCartData();
+    let totalItems = '';
+
+    if(cartData !== null) {
+        totalItems = '<table class="shopping_list"><tr><th>Наименование</th><th>Цена</th><th>Кол-во</th></tr>';
+        for(let items in cartData){
+            totalItems += '<tr>';
+            for(let i = 0; i < cartData[items].length; i++){
+                totalItems += '<td>' + cartData[items][i] + '</td>';
+            }
+            totalItems += '</tr>';
+        }
+        totalItems += '<table>';
+        cartCont.innerHTML = totalItems;
+    } else {
+        cartCont.innerHTML = 'В корзине пусто!';
+    }
+    return false;
+}
+
+addEvent(document.getElementById('checkout'), 'click', openCart);
+
+addEvent(document.getElementById('clear_cart'), 'click', function(e){
+    localStorage.removeItem('cart');
+    cartCont.innerHTML = 'Корзина очищена.';
+});
