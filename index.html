@@ -62,18 +62,23 @@
 <form id="first-form">
     <label>
         <input type="text" id="login" placeholder="Логин">
+        <div class="message" id="wrongLogin"></div>
     </label>
     <label>
         <input type="password" id="password" placeholder="Пароль">
+        <div class="message" id="wrongPassword"></div>
     </label>
     <label>
         <input type="password" id="password-again" placeholder="Пароль еще раз">
+        <div  class="message" id="wrongPasswordAgain"></div>
     </label>
     <label>
         <input type="text" id="email" placeholder="Электронная почта">
+        <div  class="message" id="wrongEmail"></div>
     </label>
     <label>
         <input type="text" id="age" placeholder="Возраст">
+        <div  class="message" id="wrongAge"></div>
     </label>
     <button type="button" id="submit-button">
         Регистрация
@@ -109,7 +114,7 @@
                 <button class="btn btn-info btn-zero" value="0">0</button>
                 <button class="btn btn-warning" value=".">.</button>
                 <button class="btn btn-warning" value="-">-</button>
-                <button class="btn btn-success btn-result" value="=">=</button>
+                <button class="btn btn-success" id="result-button" >=</button>
             </div>
         </div>
     </div>
@@ -147,7 +152,7 @@
         </button>
     </div>
     <div class="item_box">
-        <p class="item_title"></p>
+        <p class="item_title">Xiaomi Mi20</p>
         <p>
             Цена:
             <span class="item_price">

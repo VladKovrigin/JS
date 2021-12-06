@@ -35,17 +35,9 @@ reverseButton.onclick = function() {
 // красный, кликнув еще раз, текст должен вернуть исходный цвет.
 let buttonChangeP = document.getElementById('change-color');
 let pChangeColor = document.getElementById('p-color');
-let thisColor = false;
 
 buttonChangeP.onclick = function() {
-    thisColor = !thisColor;
-    if(thisColor) {
-        pChangeColor.style.color = 'red';
-    }
-    else {
-        pChangeColor.style.color = 'black';
-
-    }
+    pChangeColor.style.color === 'red' ? pChangeColor.style.color = 'black' : pChangeColor.style.color = 'red';
 }
 
 
@@ -106,16 +98,18 @@ addLi.onclick = function() {
 //         5. манго
 let addList = document.getElementById('add-to-textarea');
 let fromTextArea = document.getElementById('from-textarea');
-
+document.getElementById('text-area').value = '';
 addList.onclick = function() {
     let text = document.getElementById('text-area').value;
     text = text.split(',');
     let i = 1;
-    for(let item of text) {
-        let createLi = document.createElement('li');
-        createLi.innerText = `${i}. ${item}`;
-        fromTextArea.append(createLi);
-        i++;
+    if(text.length) {
+        for(let item of text) {
+            let createLi = document.createElement('li');
+            createLi.innerText = `${i}. ${item}`;
+            fromTextArea.append(createLi);
+            i++;
+        }
     }
 }
 
@@ -132,31 +126,59 @@ let checkLogin = '._/|,';
 let check = true;
 
 submitButton.onclick = function () {
+    let wrongLoginMessage = document.getElementById('wrongLogin');
+
     if(login.value.length < 4 || login.value.length > 20 || login.value.includes(checkLogin)) {
-        check = false;
-    }
-    let checkEmail = /\S+@\S+\.\S+/;
-    if(!checkEmail.test(email.value)) {
-        check = false;
-    }
-    if(!isFinite(myAge.value) || isFinite(myAge.value) < 0) {
-        check = false;
-    }
-    let checkPassword = password.value.match(/\d+/);
-    if(password.value.length < 6 || !checkPassword) {
-        check = false;
-    }
-    let checkPasswordAgain = passwordAgain.value.match(/\d+/);
-    if(passwordAgain.value.length < 6 || !checkPasswordAgain) {
-        check = false;
-    }
-    if(password.value !== passwordAgain.value) {
-        check = false;
+        login.style.borderColor = 'red';
+        wrongLoginMessage.innerText = 'Слишком маленькая, либо слишком большая длинна логина';
+    } else {
+        wrongLoginMessage.innerText = '';
+        login.style.borderColor = 'blue';
     }
 
-    if(!check) {
-        console.log('check = ' + check);
-        alert('ПРОВЕРЬТЕ ПРАВИЛЬНОСТЬ ЗАПОЛНЕНИЯ');
+    let wrongEmailMessage = document.getElementById('wrongEmail');
+    let checkEmail = /\S+@\S+\.\S+/;
+    if(!checkEmail.test(email.value)) {
+        email.style.borderColor = 'red';
+        wrongEmailMessage.innerText = 'Не соблюдены правила написания написания адреса Электронной почты';
+    } else {
+        wrongEmailMessage.innerText = '';
+        email.style.borderColor = 'blue';
+    }
+
+    let wrongAgeMessage = document.getElementById('wrongAge');
+    if(!isFinite(myAge.value) || isFinite(myAge.value) <= 0 || !myAge.value) {
+        myAge.style.borderColor = 'red';
+        wrongAgeMessage.innerText = 'Должно быть введено неотрицательное целое число';
+    } else {
+        wrongAgeMessage.innerText = '';
+        myAge.style.borderColor = 'blue';
+    }
+
+    let wrongPasswordMessage = document.getElementById('wrongPassword');
+    let checkPassword = password.value.match(/\d+/);
+    if(password.value.length < 6 || !checkPassword) {
+        password.style.borderColor = 'red';
+        wrongPasswordMessage.innerText = 'Пароль должен иметь не менее 6 символов';
+    } else {
+        wrongPasswordMessage.innerText = '';
+        password.style.borderColor = 'blue';
+    }
+
+    let wrongPasswordAgainMessage = document.getElementById('wrongPasswordAgain');
+    let checkPasswordAgain = passwordAgain.value.match(/\d+/);
+    if(passwordAgain.value.length < 6 || !checkPasswordAgain) {
+        passwordAgain.style.borderColor = 'red';
+        wrongPasswordAgainMessage.innerText = 'Пароль должен иметь не менее 6 символов';
+    } else {
+        wrongPasswordAgainMessage.innerText = '';
+        passwordAgain.style.borderColor = 'blue';
+    }
+    if(password.value !== passwordAgain.value && passwordAgain.value && password.value) {
+        passwordAgain.style.borderColor = 'red';
+        password.style.borderColor = 'red';
+        wrongPasswordAgainMessage.innerText = 'Пароли должны совпадать';
+    } else {
     }
 }
 
@@ -166,12 +188,14 @@ submitButton.onclick = function () {
 // кнопку "=" - вывести результат математического выражения.
 // Не забудьте добавить все проверки.
 let buttons = document.getElementById('keyboard').getElementsByTagName('button');
+let buttonResult = document.getElementById('result-button');
 
 for(let button of buttons) {
     button.onclick = function() {
-        if(button.value === '=') {
+        if(button.onclick === buttonResult.onclick) {
             let result = eval(document.getElementById('previous').innerText);
             document.getElementById('result').innerText = result;
+            document.getElementById('previous').innerText = '';
         }
         document.getElementById('previous').innerText += button.value;
     }

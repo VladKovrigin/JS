@@ -15,6 +15,7 @@ button {
 button:hover {
  color: white;
  background-color: rgba(0, 0, 0, 0.8);
+
 }
 button[type="submit"] {
  width: 350px;
@@ -75,6 +76,13 @@ textarea {
 #first-form {
  display: flex;
  flex-direction: column;
+
+}
+.message {
+ color: red;
+ font-size: 24px;
+ font-family: Verdana;
+
 }
 #first-form label {
  margin-bottom: 15px;
