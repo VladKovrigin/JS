@@ -6,174 +6,64 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
-
 </head>
+
 <body>
-<div>
-    <button onclick="alert('Hello, Palmo')">
-        Кликни
-    </button>
-</div>
+    <div class="test">
+        <div class="form-check">
+            <p class="answer">Вопрос</p>
+            <div class="options">
+                <div>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox">
+                        Вариант ответа 1
+                    </label>
+                </div>
+                <div>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox">
+                        Вариант ответа 2
+                    </label>
+                </div>
+                <div>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox">
+                        Вариант ответа 3
+                    </label>
+                </div>
+            </div>
 
-
-<div>
-    <button id="to-hello-world">Кликни</button>
-    <input id="second-point">
-</div>
-
-<div>
-    <button id="console-log">Кликни</button>
-    <input id="value-to-log">
-</div>
-
-<div>
-    <button id="reverse-value">Кликни</button>
-    <p id="first-value">Сначала тут</p>
-    <p id="second-value">Теперь тут</p>
-</div>
-
-<div>
-    <button id="change-color">Кликни</button>
-    <p id="p-color">Смена цвета текста</p>
-</div>
-
-<div>
-    <button id="to-disabled">Кликни</button>
-    <input id="disable-input">
-</div>
-
-<div class="squads">
-    <div id="first"></div>
-    <div id="second"></div>
-</div>
-
-<div class="add-li-div">
-    <button id="add-li">Добавить li</button>
-    <ul id="ol"></ul>
-</div>
-
-<div class="textArea">
-    <button id="add-to-textarea">Добавить</button>
-    <textarea id="text-area"></textarea>
-    <ul id="from-textarea"></ul>
-</div>
-
-<form id="first-form">
-    <label>
-        <input type="text" id="login" placeholder="Логин">
-        <div class="message" id="wrongLogin"></div>
-    </label>
-    <label>
-        <input type="password" id="password" placeholder="Пароль">
-        <div class="message" id="wrongPassword"></div>
-    </label>
-    <label>
-        <input type="password" id="password-again" placeholder="Пароль еще раз">
-        <div  class="message" id="wrongPasswordAgain"></div>
-    </label>
-    <label>
-        <input type="text" id="email" placeholder="Электронная почта">
-        <div  class="message" id="wrongEmail"></div>
-    </label>
-    <label>
-        <input type="text" id="age" placeholder="Возраст">
-        <div  class="message" id="wrongAge"></div>
-    </label>
-    <button type="button" id="submit-button">
-        Регистрация
-    </button>
-</form>
-
-<div class="container col-12">
-    <div id="calc" class="text-center">
-        <div id="display">
-            <div><p id="previous"></p></div>
-            <div><p id="result"></p></div>
+            <button id="add-checkbox">Добавить элемент</button>
         </div>
-        <div id="keyboard">
-            <div class="row">
-                <button class="btn btn-info" value="7">7</button>
-                <button class="btn btn-info" value="8">8</button>
-                <button class="btn btn-info" value="9">9</button>
-                <button class="btn btn-warning" value="*">*</button>
+        <div class="form-check">
+            <p class="answer">Вопрос</p>
+            <div>
+                <div>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="exampleRadios" value="option1">
+                        Вариант ответа 1
+                    </label>
+                </div>
+                <div>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="exampleRadios" value="option1">
+                        Вариант ответа 2
+                    </label>
+                </div>
+                <div>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="exampleRadios" value="option1">
+                        Вариант ответа 3
+                    </label>
+                </div>
             </div>
-            <div class="row">
-                <button class="btn btn-info" value="4">4</button>
-                <button class="btn btn-info" value="5">5</button>
-                <button class="btn btn-info" value="6">6</button>
-                <button class="btn btn-warning" value="/">/</button>
-            </div>
-            <div class="row">
-                <button class="btn btn-info" value="1">1</button>
-                <button class="btn btn-info" value="2">2</button>
-                <button class="btn btn-info" value="3">3</button>
-                <button class="btn btn-warning" value="+">+</button>
-            </div>
-            <div class="row last-row">
-                <button class="btn btn-info btn-zero" value="0">0</button>
-                <button class="btn btn-warning" value=".">.</button>
-                <button class="btn btn-warning" value="-">-</button>
-                <button class="btn btn-success" id="result-button" >=</button>
-            </div>
+            <button id="add-radio">Добавить элемент</button>
         </div>
     </div>
-</div>
 
-<div id="wrapper">
-    <div class="item_box">
-        <p class="item_title">
-            iPhone 3000 ultra
-        </p>
-        <p>
-            Цена:
-            <span class="item_price">
-                20
-            </span>
-            $
-        </p>
-        <button class="add_item" data-id="7">
-            Добавить в корзину
-        </button>
-    </div>
-    <div class="item_box">
-        <p class="item_title">
-            SamsunK S15
-        </p>
-        <p>
-            Цена:
-            <span class="item_price">
-                100
-            </span>
-            $
-        </p>
-        <button class="add_item" data-id="2">
-            Добавить в корзину
-        </button>
-    </div>
-    <div class="item_box">
-        <p class="item_title">Xiaomi Mi20</p>
-        <p>
-            Цена:
-            <span class="item_price">
-                1000
-            </span>
-            $
-        </p>
-        <button class="add_item" data-id="5">
-            Добавить в корзину
-        </button>
-    </div>
-    <p>
-        <button id="checkout">
-            Оформить заказ
-        </button> &nbsp;
-        <button id="clear_cart">
-            Очистить корзину
-        </button>
-    </p>
-    <div id="cart_content"></div>
-</div>
-<script src="js/main.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
+
 </html>
