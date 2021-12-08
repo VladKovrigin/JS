@@ -33,7 +33,6 @@ addTest.onclick = () => {
         ]
     }
     tests.push(newTest);
-    console.log(tests);
 }
 deleteElement.onclick = function () {
     let options = document.getElementById('options');
@@ -61,7 +60,7 @@ addAnswerButton.onclick = () => {
         `        ${questionName.value}` +
         '    </p>' +
         '</div>';
-
+    questionName.value = '';
     //Находим правильный вариант ответа из отмеченных
     let correctAnswer = {};
     [].forEach.call(addCorrect, (item) => {
@@ -83,12 +82,13 @@ addAnswerButton.onclick = () => {
             isCorrect: Boolean()
         }
         newQuestion.answers.push(textAnswer);
+        item.value = '';
     })
-    //console.log(newQuestion);
 }
 
-const deleteQuestion = document.getElementById('delete-question');
 
+//Удаление вопроса
+const deleteQuestion = document.getElementById('delete-question');
 deleteQuestion.onclick = function () {
     let question = document.getElementById('test');
     question.lastChild.remove();
