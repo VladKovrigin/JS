@@ -7,16 +7,6 @@ let testNumber = 0;
 let questionCounter = 0;
 const testList = document.getElementById('test-list');
 
-/*
-const getTest = localStorage.getItem('tests');
-const parseTest = JSON.parse(getTest);
-
-for(let item in parseTest) {
-    testList.innerHTML +=
-        `<li id="${testNumber++}" class="list-item" onclick="test(this)">${item.name}</li>`;
-    console.log(parseTest[item]);
-}
-*/
 
 //Добавление поля варианта при создание вопроса
 addElement.onclick = () => {
@@ -55,11 +45,11 @@ const addAnswerButton = document.getElementById('add-answer-button');
 const testName = document.getElementById('test-name');
 const questionName = document.getElementById('question-name');
 const addCorrect = document.getElementsByClassName('check-correct-answer');
+const questionList = document.getElementById('test');
 
 //Создание вопроса
 addAnswerButton.onclick = () => {
     //Создаем новый объект вопроса
-    const questionList = document.getElementById('test');
     let newQuestion = {
         title:'',
         answers: []
@@ -133,14 +123,35 @@ saveQuestion.onclick = () => {
     localStorage.setItem('tests', JSON.stringify(testsInLS));
 
     testList.innerHTML +=
-        `<li id="${testNumber++}" class="list-item" onclick="getTest(this)">${testName.value}</li>`;
+        `<li id="${testNumber++}" class="list-item" onclick="getTest(this, testNumber)">${testName.value}</li>`;
 
     clearAllQuestions();
 }
 
-function getTest(elem) {
-    const getTest = localStorage.getItem('tests');
+function getTest(elem, testNum) {
+    clearAllQuestions();
+    console.log(elem);
 
-    let thisTest =  JSON.parse(localStorage.getItem('storedUsers'));
-    console.log(thisTest);
+    let tests = JSON.parse(localStorage.getItem('test'));
+    let thisTest = tests[testNum];
+
+    //Добавляем на страницу сам вопрос
+    tests[testNum].forEach((myTest) => {
+        questionList.innerHTML +=
+            '<div class="form-check">\n' +
+            '    <p id="question-title">' +
+            `        ${myTest.name}` +
+            '    </p>' +
+            '</div>';
+
+        myTest.questions.forEach((question) => {
+            questionList.lastChild.innerHTML +=
+                '     <div>\n' +
+                '        <label class="form-check-label">\n' +
+                '            <input class="form-check-input" type="checkbox" name="exampleRadios">\n' +
+                `                 ${question}\n` +
+                '        </label>\n' +
+                '    </div>\n';
+        })
+    })
 }
