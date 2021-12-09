@@ -1,10 +1,13 @@
 const addElement = document.getElementById('add-element');
 const deleteElement = document.getElementById('delete-element');
-const tests = [];
+const test = {};
+test.questions = [];
+let tests = [];
 let testNumber = 0;
 let questionCounter = 0;
 const testList = document.getElementById('test-list');
 
+/*
 const getTest = localStorage.getItem('tests');
 const parseTest = JSON.parse(getTest);
 
@@ -13,7 +16,7 @@ for(let item in parseTest) {
         `<li id="${testNumber++}" class="list-item" onclick="test(this)">${item.name}</li>`;
     console.log(parseTest[item]);
 }
-
+*/
 
 //Добавление поля варианта при создание вопроса
 addElement.onclick = () => {
@@ -31,16 +34,17 @@ deleteElement.onclick = function () {
     let options = document.getElementById('options');
     options.lastChild.remove();
 }
-localStorage.clear()
+
 // Функция для очистки страницы
 function clearAllQuestions() {
     let question = document.getElementById('test');
     while(questionCounter > 0) {
         question.lastChild.remove();
-        --questionCounter;
+        questionCounter--;
     }
     return question;
 }
+
 
 //Создание объекта нового теста
 const addTest = document.getElementById('add-test');
@@ -93,12 +97,13 @@ addAnswerButton.onclick = () => {
             isCorrect: arrayCorrects[i]
         }
         i++;
+
         newQuestion.answers.push(textAnswer);
         item.value = '';
     })
 
     //Добавляем вопрос на страницу
-    tests.push(newQuestion);
+    test.questions.push(newQuestion);
     questionName.value = '';
 
     questionCounter++;
@@ -118,18 +123,21 @@ deleteQuestion.onclick = function () {
 //Сохранение теста
 const saveQuestion = document.getElementById('save-test');
 saveQuestion.onclick = () => {
-    tests.name = `${testName.value}`;
-    console.log(tests);
+    test.name = `${testName.value}`;
+    let testsInLS = JSON.parse(localStorage.getItem('tests'));
+    if(testsInLS === null) testsInLS = [];
+    testsInLS.push(test);
+    console.log(testsInLS);
 
-    localStorage.setItem('tests', JSON.stringify(tests));
-    console.log(JSON.stringify(tests));
-    testList.innerHTML += `<li id="${testNumber++}" class="list-item" onclick="test(this)">${testName.value}</li>`;
+    testList.innerHTML +=
+        `<li id="${testNumber++}" class="list-item" onclick="getTest(this)">${testName.value}</li>`;
+
     clearAllQuestions();
 }
 
+function getTest(elem) {
+    const getTest = localStorage.getItem('tests');
 
-function test(elem) {
-    const getTest = localStorage.getItem(elem.textContent);
-    let thisTest = JSON.parse(getTest);
+    let thisTest =  JSON.parse(localStorage.getItem('storedUsers'));
     console.log(thisTest);
 }
