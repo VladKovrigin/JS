@@ -61,7 +61,6 @@ addAnswerButton.onclick = () => {
     let arrayCorrects = [];
 
     //Находим правильный вариант ответа из отмеченных
-    let correctAnswer = {};
     [].forEach.call(addCorrect, (item) => {
         arrayCorrects.push(item.checked);
         console.log('checked ' + item.checked);
@@ -113,7 +112,7 @@ const saveQuestion = document.getElementById('save-test');
 saveQuestion.onclick = () => {
     tests.name = `${testName.value}`;
     console.log(tests);
-    localStorage.setItem('questions', JSON.stringify(tests[tests.length - 1]));
+    localStorage.setItem(tests.name, JSON.stringify(tests));
     testList.innerHTML += `<li id="${testNumber++}" class="list-item" onclick="test(this)">${testName.value}</li>`;
     clearAllQuestions();
 }
