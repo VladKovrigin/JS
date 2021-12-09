@@ -4,9 +4,18 @@ const tests = [];
 let testNumber = 0;
 let questionCounter = 0;
 const testList = document.getElementById('test-list');
-localStorage.clear();
 
-//Добавление поля варианта при созданиие вопроса
+const getTest = localStorage.getItem('tests');
+const parseTest = JSON.parse(getTest);
+
+for(let item in parseTest) {
+    testList.innerHTML +=
+        `<li id="${testNumber++}" class="list-item" onclick="test(this)">${item.name}</li>`;
+    console.log(parseTest[item]);
+}
+
+
+//Добавление поля варианта при создание вопроса
 addElement.onclick = () => {
     let options = document.getElementById('options');
     console.log(options);
@@ -22,7 +31,8 @@ deleteElement.onclick = function () {
     let options = document.getElementById('options');
     options.lastChild.remove();
 }
-
+localStorage.clear()
+// Функция для очистки страницы
 function clearAllQuestions() {
     let question = document.getElementById('test');
     while(questionCounter > 0) {
@@ -92,7 +102,6 @@ addAnswerButton.onclick = () => {
     questionName.value = '';
 
     questionCounter++;
-    console.log(questionCounter)
 }
 
 
@@ -103,7 +112,6 @@ deleteQuestion.onclick = function () {
     question.lastChild.remove();
 
     questionCounter--;
-    console.log(questionCounter)
 }
 
 
@@ -112,7 +120,9 @@ const saveQuestion = document.getElementById('save-test');
 saveQuestion.onclick = () => {
     tests.name = `${testName.value}`;
     console.log(tests);
-    localStorage.setItem(tests.name, JSON.stringify(tests));
+
+    localStorage.setItem('tests', JSON.stringify(tests));
+    console.log(JSON.stringify(tests));
     testList.innerHTML += `<li id="${testNumber++}" class="list-item" onclick="test(this)">${testName.value}</li>`;
     clearAllQuestions();
 }
@@ -122,12 +132,4 @@ function test(elem) {
     const getTest = localStorage.getItem(elem.textContent);
     let thisTest = JSON.parse(getTest);
     console.log(thisTest);
-}
-
-const getTest = localStorage.getItem('questions');
-const parseTest = JSON.parse(getTest);
-for(let item in parseTest) {
-    testList.innerHTML +=
-        `<li id="${testNumber++}" class="list-item" onclick="test(this)">${item.name}</li>`;
-    console.log(parseTest[item]);
 }
