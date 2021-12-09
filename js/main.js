@@ -1,51 +1,49 @@
 const addElement = document.getElementById('add-element');
 const deleteElement = document.getElementById('delete-element');
 const tests = [];
+let testNumber = 0;
+let questionCounter = 0;
+const testList = document.getElementById('test-list');
+localStorage.clear();
 
-//Добавление поля вариант объекта
+//Добавление поля варианта при созданиие вопроса
 addElement.onclick = () => {
     let options = document.getElementById('options');
     console.log(options);
     options.innerHTML +=
         '<li>\n' +
-        '    <input class="form-check-input" type="checkbox">\n' +
+        '    <input class="form-check-input check-correct-answer" type="checkbox">\n' +
         '    <input class="add-answer" type="text" placeholder="Вариант ответа">\n' +
         '</li>'
 }
 
-const addTest = document.getElementById('add-test');
-const testName = document.getElementById('test-name');
-
-//Создание объекта нового теста
-addTest.onclick = () => {
-    let newTest = {
-        name:  `${testName.value}`,
-        questions: [
-            {
-                title:'',
-                answers: [
-                    {
-                        text: '',
-                        isCorrect: false,
-                    }
-                ]
-            }
-        ]
-    }
-    tests.push(newTest);
-}
+// Удаляем поле варианта при создании теста
 deleteElement.onclick = function () {
     let options = document.getElementById('options');
     options.lastChild.remove();
 }
 
+function clearAllQuestions() {
+    let question = document.getElementById('test');
+    while(questionCounter > 0) {
+        question.lastChild.remove();
+        --questionCounter;
+    }
+    return question;
+}
+
+//Создание объекта нового теста
+const addTest = document.getElementById('add-test');
+addTest.onclick = clearAllQuestions();
+
 const addAnswer = document.getElementsByClassName('add-answer');
 const addAnswerButton = document.getElementById('add-answer-button');
+const testName = document.getElementById('test-name');
 const questionName = document.getElementById('question-name');
-const addCorrect = document.querySelector('.add-question .form-check-input');
+const addCorrect = document.getElementsByClassName('check-correct-answer');
 
+//Создание вопроса
 addAnswerButton.onclick = () => {
-
     //Создаем новый объект вопроса
     const questionList = document.getElementById('test');
     let newQuestion = {
@@ -60,14 +58,17 @@ addAnswerButton.onclick = () => {
         `        ${questionName.value}` +
         '    </p>' +
         '</div>';
-    questionName.value = '';
+    let arrayCorrects = [];
+
     //Находим правильный вариант ответа из отмеченных
     let correctAnswer = {};
     [].forEach.call(addCorrect, (item) => {
-        console.log('Значение ' + item.value);
+        arrayCorrects.push(item.checked);
+        console.log('checked ' + item.checked);
     })
 
     //Добавляем на страницу варианты ответов
+    let i = 0;
     newQuestion.title = questionName.value;
     [].forEach.call(addAnswer, function (item){
         questionList.lastChild.innerHTML +=
@@ -77,13 +78,22 @@ addAnswerButton.onclick = () => {
             `                 ${item.value}\n` +
             '        </label>\n' +
             '    </div>\n';
+
         let textAnswer = {
             text: `${item.value}`,
-            isCorrect: Boolean()
+            isCorrect: arrayCorrects[i]
         }
+        i++;
         newQuestion.answers.push(textAnswer);
         item.value = '';
     })
+
+    //Добавляем вопрос на страницу
+    tests.push(newQuestion);
+    questionName.value = '';
+
+    questionCounter++;
+    console.log(questionCounter)
 }
 
 
@@ -92,4 +102,33 @@ const deleteQuestion = document.getElementById('delete-question');
 deleteQuestion.onclick = function () {
     let question = document.getElementById('test');
     question.lastChild.remove();
+
+    questionCounter--;
+    console.log(questionCounter)
+}
+
+
+//Сохранение теста
+const saveQuestion = document.getElementById('save-test');
+saveQuestion.onclick = () => {
+    tests.name = `${testName.value}`;
+    console.log(tests);
+    localStorage.setItem('questions', JSON.stringify(tests[tests.length - 1]));
+    testList.innerHTML += `<li id="${testNumber++}" class="list-item" onclick="test(this)">${testName.value}</li>`;
+    clearAllQuestions();
+}
+
+
+function test(elem) {
+    const getTest = localStorage.getItem(elem.textContent);
+    let thisTest = JSON.parse(getTest);
+    console.log(thisTest);
+}
+
+const getTest = localStorage.getItem('questions');
+const parseTest = JSON.parse(getTest);
+for(let item in parseTest) {
+    testList.innerHTML +=
+        `<li id="${testNumber++}" class="list-item" onclick="test(this)">${item.name}</li>`;
+    console.log(parseTest[item]);
 }
