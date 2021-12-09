@@ -123,11 +123,14 @@ deleteQuestion.onclick = function () {
 //Сохранение теста
 const saveQuestion = document.getElementById('save-test');
 saveQuestion.onclick = () => {
+
     test.name = `${testName.value}`;
+
     let testsInLS = JSON.parse(localStorage.getItem('tests'));
     if(testsInLS === null) testsInLS = [];
     testsInLS.push(test);
     console.log(testsInLS);
+    localStorage.setItem('tests', JSON.stringify(testsInLS));
 
     testList.innerHTML +=
         `<li id="${testNumber++}" class="list-item" onclick="getTest(this)">${testName.value}</li>`;
