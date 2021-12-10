@@ -79,7 +79,7 @@ addAnswerButton.onclick = () => {
         });
     } else {
         [].forEach.call(addCorrect, (item) => {
-            item.style.border = '2px solid blue';
+            item.style.border = '1px solid rgba(128, 128, 128, 0.7)';
         });
     }
     let checkedText = true;
@@ -130,11 +130,13 @@ addAnswerButton.onclick = () => {
             newQuestion.answers.push(textAnswer);
             item.value = '';
         })
-
         //Добавляем вопрос на страницу
         test.questions.push(newQuestion);
         questionName.value = '';
         deleteQuestion.style.visibility = 'visible';
+        [].forEach.call(addCorrect, (item) => {
+            item.checked = false;
+        });
     }
 }
 
@@ -144,6 +146,7 @@ const deleteQuestion = document.getElementById('delete-question');
 deleteQuestion.onclick = () => {
     let question = document.getElementById('test');
     question.lastChild.remove();
+    test.questions.pop();
 }
 
 
@@ -170,6 +173,7 @@ saveTest.onclick = () => {
         addQuestion.style.visibility = 'hidden';
         saveTest.style.visibility = 'hidden';
         clearAllQuestions();
+        testName.value = '';
     }
 }
 let testsInLS = JSON.parse(localStorage.getItem('tests'));
@@ -233,6 +237,7 @@ function getTest(elem) {
         document.getElementById('my-mark').remove();
     }
     document.getElementById('check-corrects').style.display = 'block';
+    document.getElementById('check-corrects').style.visibility = 'visible';
 }
 
 const myMark = document.getElementById('mark');
@@ -269,3 +274,10 @@ function corrects() {
     document.getElementById('check-corrects').style.display = 'none';
 }
 document.getElementById('check-corrects').style.display = 'none';
+
+document.getElementById('delete-test').onclick = () => {
+    let testsInLS = JSON.parse(localStorage.getItem('tests'));
+    testsInLS.pop();
+    localStorage.setItem('tests', JSON.stringify(testsInLS));
+    testList.lastChild.remove();
+}

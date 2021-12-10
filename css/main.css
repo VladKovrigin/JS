@@ -76,11 +76,6 @@ main {
 label:hover {
     cursor: pointer;
 }
-@media (min-width: 576px) {
-    .modal-dialog {
-        max-width: 600px;
-    }
-}
 .modal-body {
     background-color: rgba(255, 255, 255, 0.8);
     padding: 12px 6%;
@@ -102,8 +97,10 @@ label:hover {
     font-size: 20px;
 }
 .add-answer:focus, #question-name:focus {
-    border-bottom: 4px solid #930293;
     outline: none;
+    animation-name: input-active;
+    animation-duration: 1.5s;
+    animation-fill-mode: both;
 }
 #add-element, #delete-element {
     border: 0;
@@ -193,4 +190,27 @@ label:hover {
 #my-mark {
     font-size: 40px;
     font-weight: bold;
+}
+
+@keyframes input-active {
+    0% {
+        border-bottom: 3px solid grey;
+    }
+    100% {
+        border-bottom: 3px solid #930293;
+    }
+}
+#delete-test {
+    padding: 8px 18px;
+    background-color: #ff5353;
+    border: 0;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+}
+#delete-test:hover {
+    background-color: #f62c2c;
+}
+.delete-test {
+    text-align: center;
 }
