@@ -14,14 +14,14 @@
     <main class="row">
         <div class="my-tests col-lg-2 col-sm-6">
             <ul id="test-list">
-                <li></li>
             </ul>
         </div>
-        <div class="test col-8">
+        <div class="test col-8" id="this-test">
             <div class="test-name">
                 <input id="test-name" type="text" placeholder="Название теста">
             </div>
             <div class="question" id="test">
+
             </div>
 
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -64,11 +64,16 @@
                         Удалить вопрос
                     </button>
                 </div>
-
                 <button type="button" id="save-test" class="btn btn-primary" data-bs-target="#staticBackdrop">
                     Сохранить тест
                 </button>
             </div>
+            <div class="check-corrects" id="mark">
+                <button type="button" id="check-corrects">
+                    Проверить ответы
+                </button>
+            </div>
+
         </div>
         <div class="add-test col-lg-2 col-sm-6">
             <button id="add-test">Добавить тест</button>
