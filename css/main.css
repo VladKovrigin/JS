@@ -11,13 +11,12 @@ main {
 
 #test-name {
     margin: 30px auto 20px 10px;
-    font-size: 28px;
+    font-size: 20px;
     padding: 8px 22px;
-    border-bottom: 4px solid rgb(164, 164, 164);
-    border-right: 0;
-    border-left: 0;
-    border-top: 0;
+    border: 0;
     width: 98%;
+    border-radius: 40px;
+    box-shadow: 1px 3px 6px 2px rgba(128, 128, 128, 0.7);
 }
 .test-name input:focus {
     outline: none;
@@ -26,17 +25,15 @@ main {
 .form-check {
     display: flex;
     flex-direction: column;
-    font-size: 24px;
+    font-size: 20px;
     border-radius: 20px;
     color: black;
     background-color: white;
-    padding: 30px 100px;
-    margin-bottom: 15px;
+    padding: 20px 60px;
     margin-top: 30px;
 }
 .my-tests ul {
     list-style: none;
-    font-size: 24px;
     margin-top: 30px;
     padding-inline-start: 0;
     border-radius: 10px;
@@ -49,21 +46,21 @@ main {
 }
 .my-tests li {
     text-align: center;
-    color: #5e5e5e;
     padding: 12px;
     border-radius: 4px;
-    font-size: 30px;
+    font-size: 20px;
 }
 .my-tests li:hover {
     background-color: #e7e7e7;
     border-radius: 4px;
 }
 .question {
-    font-size:  24px;
+    font-size:  20px;
 }
 #question-title {
-    font-size: 30px;
+    font-size: 22px;
     font-weight: bold;
+    margin-bottom: 8px;
 }
 #add-checkbox, #add-radio {
     width: 200px;
@@ -81,12 +78,12 @@ label:hover {
 }
 @media (min-width: 576px) {
     .modal-dialog {
-        max-width: 1000px;
+        max-width: 600px;
     }
 }
 .modal-body {
     background-color: rgba(255, 255, 255, 0.8);
-    padding-left: 70px;
+    padding: 12px 6%;
 }
 #options {
     list-style: none;
@@ -98,11 +95,11 @@ label:hover {
     border-left: 0;
     border-right: 0;
     border-top: 0;
-    height: 50px;
     width: 80%;
-    padding-left: 20px;
+    padding-left: 10px;
     min-width: 50%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    font-size: 20px;
 }
 .add-answer:focus, #question-name:focus {
     border-bottom: 4px solid #930293;
@@ -117,26 +114,28 @@ label:hover {
     height: 40px;
 }
 .form-check-input {
-    height: 25px;
-    width: 25px;
-    margin: 7px 0;
+    height: 24px;
+    width: 24px;
+    margin: 8px 12px;
 }
 .form-check-label {
-    font-size: 30px;
-    margin-bottom: 6px;
-    margin-left: 45px;
-    margin-top: 6px;
+    font-size: 22px;
+    margin-left: 20px;
 }
 #add-test {
     background-color: #0d6efd;
-    padding: 8px 21px;
+    padding: 6px 18px;
     border-radius: 10px;
-    font-size: 28px;
+    font-size: 20px;
     color: white;
     border: 0;
-    min-width: 230px;
-    margin-top: 30px;
+    max-width: 210px;
     width: 100%;
+}
+.add-test {
+    margin-top: 20px;
+    margin-bottom: -16px;
+    text-align: center;
 }
 #add-test:hover {
     background-color: #085cd7;
@@ -147,32 +146,25 @@ label:hover {
 .add-question-button {
     margin: 20px auto;
     display: flex;
-    justify-content: space-between;
-    width: 90%;
-    font-size: 30px;
+    justify-content: space-around;
 }
 .btn-primary, .btn-secondary {
-    font-size: 28px;
+    font-size: 18px;
     border-radius: 10px;
-    min-width: 270px;
-    max-height: 60px;
+    max-height: 40px;
 }
 #question-name {
-    margin-left: 38px;
-    margin-bottom: 30px;
-}
-.form-check-input {
-    height: 30px;
-    width: 30px;
-    margin: 8px 0;
+    margin-left: 32px;
+    width: calc(81% - 5px);
 }
 #delete-question {
-    padding: 8px 20px;
-    color: white;
-    background-color: coral;
+    padding: 8px 14px;
+    background-color: #ff5353;
     border: 0;
-    margin-left: 6px;
     border-radius: 10px;
+}
+#delete-question:hover {
+    background-color: #f62c2c;
 }
 #check-corrects {
     padding: 8px 20px;
@@ -195,9 +187,8 @@ label:hover {
     margin-top: -65px;
 }
 .right-answer {
-    margin: 2px 0;
     border-radius: 10px;
-    padding-left: 20px;
+    padding: 4px 12px;
 }
 #my-mark {
     font-size: 40px;

@@ -25,7 +25,6 @@ deleteElement.onclick = function () {
 }
 
 // Функция для очистки страницы
-
 function clearAllQuestions ()  {
     while(questionList.lastChild) {
         questionList.lastChild.remove();
@@ -34,8 +33,6 @@ function clearAllQuestions ()  {
 }
 
 const addQuestion = document.getElementById('add-question');
-
-const checkCorrects = document.getElementById('check-corrects');
 const testName = document.getElementById('test-name');
 
 //Создание объекта нового теста
@@ -46,7 +43,6 @@ addTest.onclick = function addNewTest() {
 
     addQuestion.style.visibility = 'visible';
     saveTest.style.visibility = 'visible';
-    checkCorrects.style.visibility = 'hidden';
     testName.style.visibility = 'visible';
     for(let thisTest of listItem) {
         thisTest.style.pointerEvents = 'auto';
@@ -54,7 +50,6 @@ addTest.onclick = function addNewTest() {
 
     return false;
 }
-checkCorrects.style.visibility = 'hidden';
 
 const addAnswer = document.getElementsByClassName('add-answer');
 const addAnswerButton = document.getElementById('add-answer-button');
@@ -69,47 +64,78 @@ addAnswerButton.onclick = () => {
         title:'',
         answers: []
     }
-
-    //Добавляем на страницу сам вопрос
-    questionList.innerHTML +=
-        '<div class="form-check">\n' +
-        '    <p id="question-title">' +
-        `        ${questionName.value}` +
-        '    </p>' +
-        '</div>';
     let arrayCorrects = [];
-
+    let checkedAnswer = false;
     //Находим правильный вариант ответа из отмеченных
     [].forEach.call(addCorrect, (item) => {
         arrayCorrects.push(item.checked);
-    })
-
-    //Добавляем на страницу варианты ответов
-    let i = 0;
-    newQuestion.title = questionName.value;
-    [].forEach.call(addAnswer, function (item){
-        questionList.lastChild.innerHTML +=
-            '     <div>\n' +
-            '        <label class="form-check-label">\n' +
-            '            <input class="form-check-input" type="checkbox" name="exampleRadios">\n' +
-            `                 ${item.value}\n` +
-            '        </label>\n' +
-            '    </div>\n';
-
-        let textAnswer = {
-            text: `${item.value}`,
-            isCorrect: arrayCorrects[i]
+        if(item.checked) {
+            checkedAnswer = true;
         }
-        i++;
-
-        newQuestion.answers.push(textAnswer);
-        item.value = '';
+    });
+    if(!checkedAnswer) {
+        [].forEach.call(addCorrect, (item) => {
+            item.style.border = '2px solid rgba(255,69,50,0.8)';
+        });
+    } else {
+        [].forEach.call(addCorrect, (item) => {
+            item.style.border = '2px solid blue';
+        });
+    }
+    let checkedText = true;
+    [].forEach.call(addAnswer, (item) => {
+        if(!item.value) {
+            checkedText = false;
+            item.style.backgroundColor = 'rgba(255,69,50,0.3)';
+            item.style.borderRadius=  '10px';
+        } else {
+            item.style.backgroundColor = 'white';
+            item.style.borderRadius=  '0';
+        }
     })
+    if(!questionName.value) {
+        questionName.style.backgroundColor = 'rgba(255,69,50,0.3)';
+        questionName.style.borderRadius=  '10px';
+    } else {
+        questionName.style.backgroundColor = 'white';
+        questionName.style.borderRadius=  '0';
+    }
+    if( questionName.value && checkedAnswer && checkedText ) {
+        //Добавляем на страницу сам вопрос
+        questionList.innerHTML +=
+            '<div class="form-check">\n' +
+            '    <p id="question-title">' +
+            `        ${questionName.value}` +
+            '    </p>' +
+            '</div>';
 
-    //Добавляем вопрос на страницу
-    test.questions.push(newQuestion);
-    questionName.value = '';
-    deleteQuestion.style.visibility = 'visible';
+        //Добавляем на страницу варианты ответов
+        let i = 0;
+        newQuestion.title = questionName.value;
+        [].forEach.call(addAnswer, (item) => {
+            questionList.lastChild.innerHTML +=
+                '     <div>\n' +
+                '        <label class="form-check-label">\n' +
+                '            <input class="form-check-input" type="checkbox" name="exampleRadios">\n' +
+                `                 ${item.value}\n` +
+                '        </label>\n' +
+                '    </div>\n';
+
+            let textAnswer = {
+                text: `${item.value}`,
+                isCorrect: arrayCorrects[i]
+            }
+            i++;
+
+            newQuestion.answers.push(textAnswer);
+            item.value = '';
+        })
+
+        //Добавляем вопрос на страницу
+        test.questions.push(newQuestion);
+        questionName.value = '';
+        deleteQuestion.style.visibility = 'visible';
+    }
 }
 
 
@@ -127,6 +153,11 @@ const saveTest = document.getElementById('save-test');
 saveTest.onclick = () => {
     let testsInLS = JSON.parse(localStorage.getItem('tests'));
 
+    if(!testName.value) {
+        testName.style.boxShadow = '#ff211e 0px 2px 8px 2px';
+    } else {
+        testName.style.boxShadow = '1px 3px 6px 2px rgba(128, 128, 128, 0.7)';
+    }
     if(testName.value && +test.questions.length > 0) {
         test.name = `${testName.value}`;
         if(testsInLS === null) testsInLS = [];
@@ -195,17 +226,18 @@ function getTest(elem) {
         thisTest.style.pointerEvents = 'auto';
     }
     elem.style.pointerEvents = 'none';
-
     // Корректируем страницу
-    checkCorrects.style.visibility = 'visible';
     testName.value = '';
     testName.style.visibility = 'hidden';
+    if(document.getElementById('my-mark')) {
+        document.getElementById('my-mark').remove();
+    }
+    document.getElementById('check-corrects').style.display = 'block';
 }
 
 const myMark = document.getElementById('mark');
 
-checkCorrects.onclick = () => {
-
+function corrects() {
     let inputs = document.getElementsByClassName('form-check-input');
     let div = document.getElementsByClassName('right-answer');
     let i = 0;
@@ -224,12 +256,16 @@ checkCorrects.onclick = () => {
                 div[i].style.backgroundColor = 'rgba(255,69,50,0.4)';
             }
             if(ans.isCorrect && !inputs[i].checked) {
-                div[i].style.backgroundColor = 'rgba(255,153,50,0.4)';
+                div[i].style.backgroundColor = 'rgba(255,69,50,0.4)';
                 maxMark++;
             }
             inputs[i].style.display = 'none';
             i++;
         }
     }
-    myMark.innerHTML += `<p id="my-mark">Баллов: ${mark}/${maxMark}</p>\n`;
+    if(!document.getElementById('my-mark')) {
+        myMark.innerHTML += `<p id="my-mark">Баллов: ${mark}/${maxMark}</p>\n`;
+    }
+    document.getElementById('check-corrects').style.display = 'none';
 }
+document.getElementById('check-corrects').style.display = 'none';

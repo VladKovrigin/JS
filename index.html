@@ -12,16 +12,18 @@
 
 <body>
     <main class="row">
-        <div class="my-tests col-lg-2 col-sm-6">
+        <div class="my-tests col-lg-3 col-sm-8">
+            <div class="add-test">
+                <button id="add-test">Добавить тест</button>
+            </div>
             <ul id="test-list">
             </ul>
         </div>
-        <div class="test col-8" id="this-test">
+        <div class="test col-lg-8 col-md-10" id="this-test">
             <div class="test-name">
                 <input id="test-name" type="text" placeholder="Название теста">
             </div>
             <div class="question" id="test">
-
             </div>
 
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -56,7 +58,7 @@
                 </div>
             </div>
             <div class="add-question-button">
-                <div>
+                <div class="col-8">
                     <button type="button" id="add-question" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         Добавить вопрос
                     </button>
@@ -64,19 +66,16 @@
                         Удалить вопрос
                     </button>
                 </div>
-                <button type="button" id="save-test" class="btn btn-primary" data-bs-target="#staticBackdrop">
+                <button type="button" id="save-test" class="btn btn-primary col-4" data-bs-target="#staticBackdrop">
                     Сохранить тест
                 </button>
             </div>
             <div class="check-corrects" id="mark">
-                <button type="button" id="check-corrects">
+                <button type="button" id="check-corrects" onclick="corrects()">
                     Проверить ответы
                 </button>
             </div>
 
-        </div>
-        <div class="add-test col-lg-2 col-sm-6">
-            <button id="add-test">Добавить тест</button>
         </div>
     </main>
 
