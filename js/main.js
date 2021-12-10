@@ -4,6 +4,7 @@ const test = {};
 test.questions = [];
 let tests = [];
 let testNumber = 0;
+let btnDelItem = 0;
 const testList = document.getElementById('test-list');
 let thisTest = 0;
 const listItem = document.getElementsByClassName('list-item');
@@ -26,10 +27,11 @@ deleteElement.onclick = function () {
 
 // Функция для очистки страницы
 function clearAllQuestions ()  {
-    while(questionList.lastChild) {
+    while( questionList.lastChild ) {
         questionList.lastChild.remove();
     }
-    deleteQuestion.style.visibility = 'hidden';
+    btnDelItem = 0;
+    //deleteQuestion.style.visibility = 'visible';
 }
 
 const addQuestion = document.getElementById('add-question');
@@ -59,6 +61,7 @@ const questionList = document.getElementById('test');
 
 //Создание вопроса
 addAnswerButton.onclick = () => {
+
     //Создаем новый объект вопроса
     let newQuestion = {
         title:'',
@@ -66,6 +69,7 @@ addAnswerButton.onclick = () => {
     }
     let arrayCorrects = [];
     let checkedAnswer = false;
+
     //Находим правильный вариант ответа из отмеченных
     [].forEach.call(addCorrect, (item) => {
         arrayCorrects.push(item.checked);
@@ -73,6 +77,8 @@ addAnswerButton.onclick = () => {
             checkedAnswer = true;
         }
     });
+
+    // Отмечены / НЕ отмечены отмечены правильные ответы (минимум 1)
     if(!checkedAnswer) {
         [].forEach.call(addCorrect, (item) => {
             item.style.border = '2px solid rgba(255,69,50,0.8)';
@@ -82,6 +88,8 @@ addAnswerButton.onclick = () => {
             item.style.border = '1px solid rgba(128, 128, 128, 0.7)';
         });
     }
+
+    // Записаны / НЕ записаны ВСЕ варианты ответа
     let checkedText = true;
     [].forEach.call(addAnswer, (item) => {
         if(!item.value) {
@@ -93,6 +101,8 @@ addAnswerButton.onclick = () => {
             item.style.borderRadius=  '0';
         }
     })
+
+    // Записан / НЕ записан вопрос (название вопроса)
     if(!questionName.value) {
         questionName.style.backgroundColor = 'rgba(255,69,50,0.3)';
         questionName.style.borderRadius=  '10px';
@@ -100,6 +110,8 @@ addAnswerButton.onclick = () => {
         questionName.style.backgroundColor = 'white';
         questionName.style.borderRadius=  '0';
     }
+
+    // Если всё введено правильно
     if( questionName.value && checkedAnswer && checkedText ) {
         //Добавляем на страницу сам вопрос
         questionList.innerHTML +=
@@ -126,14 +138,19 @@ addAnswerButton.onclick = () => {
                 isCorrect: arrayCorrects[i]
             }
             i++;
-
             newQuestion.answers.push(textAnswer);
             item.value = '';
         })
+        questionList.lastChild.innerHTML +=
+            `<button type="button" class="delete-question" class="btn btn-primary" questionId="${btnDelItem}" onclick="deleteThisQuestion(this)">\n` +
+            '    Удалить вопрос\n' +
+            '</button>'
+        btnDelItem++;
+
         //Добавляем вопрос на страницу
         test.questions.push(newQuestion);
         questionName.value = '';
-        deleteQuestion.style.visibility = 'visible';
+        //deleteQuestion.style.visibility = 'visible';
         [].forEach.call(addCorrect, (item) => {
             item.checked = false;
         });
@@ -142,55 +159,69 @@ addAnswerButton.onclick = () => {
 
 
 //Удаление вопроса
-const deleteQuestion = document.getElementById('delete-question');
-deleteQuestion.onclick = () => {
-    let question = document.getElementById('test');
-    question.lastChild.remove();
-    test.questions.pop();
+function deleteThisQuestion(elem) {
+    test.questions.splice(+elem.getAttribute('questionId'), 1);
+    elem.parentElement.remove();
 }
 
 
 //Сохранение теста
 const saveTest = document.getElementById('save-test');
-
 saveTest.onclick = () => {
+
     let testsInLS = JSON.parse(localStorage.getItem('tests'));
 
+    // Записано / НЕ записано название ТЕСТА
     if(!testName.value) {
         testName.style.boxShadow = '#ff211e 0px 2px 8px 2px';
     } else {
         testName.style.boxShadow = '1px 3px 6px 2px rgba(128, 128, 128, 0.7)';
     }
+    // Если записано имя и имеется минимум один вопрос
     if(testName.value && +test.questions.length > 0) {
+        //Сохраняем тест в LS
         test.name = `${testName.value}`;
         if(testsInLS === null) testsInLS = [];
         testsInLS.push(test);
         localStorage.setItem('tests', JSON.stringify(testsInLS));
 
-        testList.innerHTML +=
-            `<li id="${testNumber++}" class="list-item" onclick="getTest(this, testNumber)">${testName.value}</li>`;
+        // выводим на экран иконку нового теста
+        addTestIcon(test);
 
+        // Скрываем ненужные кнопки
         addQuestion.style.visibility = 'hidden';
         saveTest.style.visibility = 'hidden';
         clearAllQuestions();
         testName.value = '';
     }
 }
-let testsInLS = JSON.parse(localStorage.getItem('tests'));
 
+//Функция вывода иконок тестов
+let testsInLS = JSON.parse(localStorage.getItem('tests'));
+function addTestIcon(thisTest) {
+    testList.innerHTML +=
+        '<li>' +
+        `<button type="button" class="delete-test-button" onclick="delThisTest(this)">&#10006</button>\n` +
+        `   <label id="${testNumber++}" name="${thisTest.name}" class="list-item" onclick="getTest(this)">` +
+        `       ${thisTest.name}` +
+        '   </label>' +
+        '</li>'
+}
+
+//Выводим список тестов
 if(JSON.parse(localStorage.getItem('tests'))) {
     testsInLS.forEach((test) => {
-        testList.innerHTML +=
-            `<li id="${testNumber++}" class="list-item" onclick="getTest(this)">${test.name}</li>`;
+        addTestIcon(test)
     })
 }
 
 
+//Достаем тест из LS и выводим
 function getTest(elem) {
+
     // Корректируем страницу
     clearAllQuestions();
     addQuestion.style.visibility = 'hidden';
-    deleteQuestion.style.visibility = 'hidden';
     saveTest.style.visibility = 'hidden';
     let tests = JSON.parse(localStorage.getItem('tests'));
     thisTest = tests[elem.id];
@@ -218,9 +249,9 @@ function getTest(elem) {
             questionList.lastChild.innerHTML +=
                 '     <div class="right-answer">\n' +
                 '        <label class="form-check-label">\n' +
+                '        </label>\n' +
                 '            <input class="form-check-input" type="checkbox" name="exampleRadios">\n' +
                 `                 ${answer.text}\n` +
-                '        </label>\n' +
                 '    </div>\n';
         })
     }
@@ -230,6 +261,7 @@ function getTest(elem) {
         thisTest.style.pointerEvents = 'auto';
     }
     elem.style.pointerEvents = 'none';
+
     // Корректируем страницу
     testName.value = '';
     testName.style.visibility = 'hidden';
@@ -242,6 +274,7 @@ function getTest(elem) {
 
 const myMark = document.getElementById('mark');
 
+//Проверяем тест
 function corrects() {
     let inputs = document.getElementsByClassName('form-check-input');
     let div = document.getElementsByClassName('right-answer');
@@ -252,11 +285,14 @@ function corrects() {
     //Проверка на правильность
     for(let item of thisTest.questions) {
         for(let ans of item.answers) {
+            //Правильный ответ
             if(ans.isCorrect && inputs[i].checked) {
                 div[i].style.backgroundColor = 'rgba(83, 185, 66, 0.4)';
                 mark++;
                 maxMark++;
             }
+
+            //Неправильные ответы
             if(!ans.isCorrect && inputs[i].checked) {
                 div[i].style.backgroundColor = 'rgba(255,69,50,0.4)';
             }
@@ -268,16 +304,35 @@ function corrects() {
             i++;
         }
     }
+
+    //Выводим кол-во баллов
     if(!document.getElementById('my-mark')) {
         myMark.innerHTML += `<p id="my-mark">Баллов: ${mark}/${maxMark}</p>\n`;
     }
     document.getElementById('check-corrects').style.display = 'none';
 }
+
 document.getElementById('check-corrects').style.display = 'none';
 
+//Удаление теста
 document.getElementById('delete-test').onclick = () => {
     let testsInLS = JSON.parse(localStorage.getItem('tests'));
     testsInLS.pop();
     localStorage.setItem('tests', JSON.stringify(testsInLS));
     testList.lastChild.remove();
+}
+
+function delThisTest(elem) {
+    let testsInLS = JSON.parse(localStorage.getItem('tests'));
+    let thisTestName = elem.parentElement.lastChild.getAttribute('name');
+    for(let needsName of testsInLS) {
+        if(thisTestName === needsName.name) {
+            testsInLS.splice(+testsInLS.indexOf(needsName), 1);
+            console.log(+testsInLS.indexOf(needsName));
+        }
+    }
+    console.log(testsInLS);
+    localStorage.setItem('tests', JSON.stringify(testsInLS));
+
+    elem.parentElement.remove();
 }

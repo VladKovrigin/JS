@@ -45,10 +45,12 @@ main {
     color: black;
 }
 .my-tests li {
-    text-align: center;
     padding: 12px;
     border-radius: 4px;
     font-size: 20px;
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
 }
 .my-tests li:hover {
     background-color: #e7e7e7;
@@ -127,7 +129,6 @@ label:hover {
     color: white;
     border: 0;
     max-width: 210px;
-    width: 100%;
 }
 .add-test {
     margin-top: 20px;
@@ -149,6 +150,7 @@ label:hover {
     font-size: 18px;
     border-radius: 10px;
     max-height: 40px;
+    max-width: 170px;
 }
 #question-name {
     margin-left: 32px;
@@ -200,17 +202,28 @@ label:hover {
         border-bottom: 3px solid #930293;
     }
 }
-#delete-test {
-    padding: 8px 18px;
+.delete-question, #delete-test {
+    padding: 6px 0px;
     background-color: #ff5353;
     border: 0;
     border-radius: 10px;
     color: white;
     font-size: 20px;
+    width: 170px;
 }
-#delete-test:hover {
+.delete-question:hover, #delete-test:hover {
     background-color: #f62c2c;
 }
 .delete-test {
     text-align: center;
+}
+.delete-test-button {
+    border: 0;
+    font-size: 26px;
+    background-color: white;
+}
+
+#test-list label{
+    display: flex;
+    margin: auto 0;
 }
